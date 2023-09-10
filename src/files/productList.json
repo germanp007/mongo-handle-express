@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "title": "adidas",
+    "description": "sneakers",
+    "code": "ADD12",
+    "price": 115,
+    "stock": 12,
+    "category": "shoes",
+    "thumbnail": [
+      "sneakers.png"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "dasf",
+    "description": "sneakers",
+    "code": "ADD13",
+    "price": 115,
+    "stock": 12,
+    "category": "shoes",
+    "thumbnail": [
+      "gdxf.png"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "xxxttttt2",
+    "description": "sneakers",
+    "price": 115,
+    "category": "shoes",
+    "thumbnail": [],
+    "status": true,
+    "code": "ADD78",
+    "stock": 12
+  }
+]
