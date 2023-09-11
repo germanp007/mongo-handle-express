@@ -9,10 +9,10 @@ export class CartManager {
   }
   async getCarts() {
     try {
-      if (fs.existsSync(this.filePath)) {
+      if (this.fileExists()) {
         const data = await fs.promises.readFile(this.filePath, "utf-8");
         const cartsList = JSON.parse(data);
-        console.log(cartsList);
+
         return cartsList;
       }
     } catch (error) {
@@ -42,12 +42,11 @@ export class CartManager {
   }
   async getCartById(id) {
     try {
-      if (this.fileExists()) {
-        const carts = await fs.promises.readFile(this.filePath, "utf-8");
-        const cartJson = JSON.parse(carts);
-        const result = cartJson.find((item) => {
-          item.id === id;
-        });
+      const cartId = id;
+      const carts = await this.getCarts();
+      const result = carts.find((item) => item.id === cartId);
+
+      if (result) {
         return result;
       } else {
         throw new Error("No existe el archivo");
@@ -56,5 +55,34 @@ export class CartManager {
       console.log("Error", error);
     }
   }
-  deleteProduct() {}
+  async addProductToCart(cartId, productId) {
+    try {
+      if (this.fileExists()) {
+        const cartList = await this.getCarts();
+        console.log(cartList);
+        const index = cartList.findIndex((ele) => ele.id === cartId);
+        if (index !== -1) {
+          let productIndex = cartList[index].products.findIndex(
+            (ele) => ele.id === productId
+          );
+
+          if (productIndex !== -1) {
+            cartList[index].products[productIndex].quantity++;
+          } else {
+            const newProduct = {
+              id: productId,
+              quantity: 1,
+            };
+            cartList[index].products.push(newProduct);
+          }
+        }
+        await fs.promises.writeFile(
+          this.filePath,
+          JSON.stringify(cartList, null, 2)
+        );
+      } else {
+        throw new Error("Carrito no encontrado");
+      }
+    } catch (error) {}
+  }
 }

@@ -82,7 +82,7 @@ export class ProductManager {
       if (fs.existsSync(this.filePath)) {
         const data = await fs.promises.readFile(this.filePath, "utf-8");
         const productList = JSON.parse(data);
-        console.log(productList);
+
         return productList;
       }
     } catch (error) {
