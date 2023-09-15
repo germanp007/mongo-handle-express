@@ -59,7 +59,7 @@ export class CartManager {
     try {
       if (this.fileExists()) {
         const cartList = await this.getCarts();
-        console.log(cartList);
+
         const index = cartList.findIndex((ele) => ele.id === cartId);
         if (index !== -1) {
           let productIndex = cartList[index].products.findIndex(

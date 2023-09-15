@@ -1,0 +1,63 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Agregar producto</h1>
+    <section class="formulario">
+      <form method="post" action="/api/products">
+        <label for="title">Titulo</label><br />
+        <input
+          type="text"
+          placeholder="Ingrese titulo del articulo"
+          name="title"
+          id="title"
+        />
+        <br /><br />
+        <label for="description">descripcion</label><br />
+        <input
+          type="text"
+          placeholder="breve descripcion"
+          name="description"
+          id="description"
+        />
+        <br /><br />
+        <label for="price">precio</label><br />
+        <input
+          type="text"
+          placeholder="Ingrese precio"
+          name="price"
+          id="price"
+        />
+        <br /><br />
+        <label for="category">categoria</label><br />
+        <input
+          type="text"
+          placeholder="Ingrese categoria"
+          name="category"
+          id="category"
+        />
+        <br /><br />
+        <label for="code">codigo de referencia</label><br />
+        <input
+          type="text"
+          placeholder="Ingrese codigo de referencia"
+          name="code"
+          id="code"
+        />
+        <br /><br />
+        <label for="stock">cantidad</label><br />
+        <input
+          type="text"
+          placeholder="Ingrese cantidad"
+          name="stock"
+          id="stock"
+        />
+        <br /><br />
+        <button type="button">Agregar producto</button>
+      </form>
+    </section>
+  </body>
+</html>
