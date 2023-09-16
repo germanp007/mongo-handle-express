@@ -1,19 +1,5 @@
 [
   {
-    "id": 7,
-    "title": "psp 5",
-    "description": "playstation 5",
-    "price": 320,
-    "category": "electrodomesticos",
-    "thumbnail": [
-      "sdafsf.png",
-      "56thfgf.png"
-    ],
-    "status": true,
-    "code": "AD106",
-    "stock": 3
-  },
-  {
     "id": 13,
     "title": "caña de pezcar",
     "description": "caña de pezca deportiva Bassproshop",
@@ -45,5 +31,27 @@
     "status": true,
     "code": "NIK002",
     "stock": "10"
+  },
+  {
+    "id": 16,
+    "title": "Impresora 3d",
+    "description": "impresora 3d Mac D234",
+    "price": "328",
+    "category": "tecnologia",
+    "thumbnail": [],
+    "status": true,
+    "code": "TEC001",
+    "stock": "4"
+  },
+  {
+    "id": 17,
+    "title": "macbook hp",
+    "description": "macbook hp 7i 2545",
+    "price": "375",
+    "category": "tecnologia",
+    "thumbnail": [],
+    "status": true,
+    "code": "TEC005",
+    "stock": "5"
   }
 ]

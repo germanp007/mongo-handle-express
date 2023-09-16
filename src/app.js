@@ -4,11 +4,19 @@ import { routerProducts } from "./routes/products.routes.js";
 import { routerCart } from "./routes/carts.routes.js";
 import { viewsRouter } from "./routes/views.routes.js";
 import { __dirname } from "./utils.js";
+import { ProductManager } from "./persistencia/files/productManager.js";
+import { Server } from "socket.io";
 import path from "path";
+import { productsManager } from "./persistencia/index.js";
+
 const server = express();
 const PORT = 3000;
 
-server.listen(PORT, () => console.log("Servidor activo"));
+// Server con HTTP
+const httpServer = server.listen(PORT, () => console.log("Servidor activo"));
+
+// Server con Socket.io
+const io = new Server(httpServer);
 
 // Midlewares
 server.use(express.urlencoded({ extended: true })); // para formularios
@@ -26,3 +34,13 @@ server.set("views", path.join(__dirname, "/views"));
 server.use(viewsRouter);
 server.use("/api/products", routerProducts);
 server.use("/api/carts", routerCart);
+
+io.on("connection", async (socket) => {
+  const products = await productsManager.getProducts();
+  socket.emit("productList", products);
+  socket.on("addProduct", async (getting) => {
+    await productsManager.addProduct(getting);
+    const products = await productsManager.getProducts();
+    io.emit("productList", products);
+  });
+});

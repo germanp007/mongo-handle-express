@@ -1,7 +1,10 @@
 <h1>Socket IO</h1>
 <div style="display:grid; grid-template-columns: 1fr 1fr;">
+
   <section class="formulario" id="socket">
-    <form>
+
+    <form id="realtime-form">
+      <h1>Agregar Producto</h1>
       <label for="title">Titulo</label><br />
       <input
         type="text"
@@ -45,22 +48,15 @@
         id="stock"
       />
       <br /><br />
-      <button>Agregar producto</button>
+      <button onclick="submit">Agregar producto</button>
     </form>
 
   </section>
-  <div class="card-container">
-    {{#each products}}
-      <div class="card">
-        <h1>{{this.title}}</h1>
-        <h3>{{this.description}}</h3>
-        <div class="category">
-          <h5>category: {{this.category}}</h5>
-          <h3>{{this.price}}usd$</h3>
-        </div>
-        <button class="delete-product" data-productid="{{this.id}}">Eliminar
-          Producto</button>
-      </div>
-    {{/each}}
+  <div style="border-left: rgb(95, 95, 95) solid 1px;">
+    <h2>Listado de productos</h2>
+    <div class="card-container" id="productContainer">
+    </div>
   </div>
 </div>
+<script src="socket.io/socket.io.js"></script>
+<script src="js/realTime.js"></script>
