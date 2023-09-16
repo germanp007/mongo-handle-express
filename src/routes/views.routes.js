@@ -18,5 +18,11 @@ router.get("/", (req, res) => {
 router.get("/agregar", (req, res) => {
   res.render("agregar");
 });
+router.get("/realtimeproducts", (req, res) => {
+  let data = {
+    products: products,
+  };
+  res.render("realTime", data);
+});
 
 export { router as viewsRouter };

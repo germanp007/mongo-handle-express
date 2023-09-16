@@ -39,6 +39,7 @@ section {
   border-radius: 8px;
   overflow: hidden;
   width: 300px;
+  height: 200px;
   margin: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -55,5 +56,14 @@ section {
 .formulario {
   display: flex; /*Alineando el formulario*/
   justify-content: center; /*Centrado horizontalmente */
-  align-items: center;
+  align-items: start;
+}
+label {
+  font-size: 20px;
+}
+
+input {
+  height: 25px;
+  width: 250px;
+  padding-left: 5px;
 }

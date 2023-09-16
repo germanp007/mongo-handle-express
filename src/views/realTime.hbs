@@ -1,0 +1,66 @@
+<h1>Socket IO</h1>
+<div style="display:grid; grid-template-columns: 1fr 1fr;">
+  <section class="formulario" id="socket">
+    <form>
+      <label for="title">Titulo</label><br />
+      <input
+        type="text"
+        placeholder="Ingrese titulo del articulo"
+        name="title"
+        id="title"
+      />
+      <br /><br />
+      <label for="description">descripcion</label><br />
+      <input
+        type="text"
+        placeholder="breve descripcion"
+        name="description"
+        id="description"
+      />
+      <br /><br />
+      <label for="price">precio</label><br />
+      <input type="text" placeholder="Ingrese precio" name="price" id="price" />
+      <br /><br />
+      <label for="category">categoria</label><br />
+      <input
+        type="text"
+        placeholder="Ingrese categoria"
+        name="category"
+        id="category"
+      />
+      <br /><br />
+      <label for="code">codigo de referencia</label><br />
+      <input
+        type="text"
+        placeholder="Ingrese codigo de referencia"
+        name="code"
+        id="code"
+      />
+      <br /><br />
+      <label for="stock">cantidad</label><br />
+      <input
+        type="text"
+        placeholder="Ingrese cantidad"
+        name="stock"
+        id="stock"
+      />
+      <br /><br />
+      <button>Agregar producto</button>
+    </form>
+
+  </section>
+  <div class="card-container">
+    {{#each products}}
+      <div class="card">
+        <h1>{{this.title}}</h1>
+        <h3>{{this.description}}</h3>
+        <div class="category">
+          <h5>category: {{this.category}}</h5>
+          <h3>{{this.price}}usd$</h3>
+        </div>
+        <button class="delete-product" data-productid="{{this.id}}">Eliminar
+          Producto</button>
+      </div>
+    {{/each}}
+  </div>
+</div>

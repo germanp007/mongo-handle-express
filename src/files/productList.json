@@ -1,95 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "lampara",
-    "description": "lampara de camping",
-    "price": 25,
-    "category": "hogar",
-    "thumbnail": [
-      "qwrg.png",
-      "tsdfqt.png",
-      "esag.png",
-      "wasfg.png"
-    ],
-    "status": true,
-    "code": "AD100",
-    "stock": 12
-  },
-  {
-    "id": 2,
-    "title": "sofa",
-    "description": "sofa para living",
-    "price": 80,
-    "category": "hogar",
-    "thumbnail": [
-      "wras.png",
-      "trd.png",
-      "4gfds.png",
-      "vgdd.png"
-    ],
-    "status": true,
-    "code": "AD101",
-    "stock": 5
-  },
-  {
-    "id": 3,
-    "title": "silla",
-    "description": "silla reposadora",
-    "price": 15,
-    "category": "hogar",
-    "thumbnail": [
-      "4tgdfhas.png",
-      "trdfdf.png"
-    ],
-    "status": true,
-    "code": "AD102",
-    "stock": 3
-  },
-  {
-    "id": 4,
-    "title": "tv",
-    "description": "tv hd 32'",
-    "price": 115,
-    "category": "electrodomesticos",
-    "thumbnail": [
-      "dgfdfds.png",
-      "fdgdg.png",
-      "fdgdgsfsg.png"
-    ],
-    "status": true,
-    "code": "AD103",
-    "stock": 8
-  },
-  {
-    "id": 5,
-    "title": "mesa",
-    "description": "mesa de noche 1x2",
-    "price": 25,
-    "category": "hogar",
-    "thumbnail": [
-      "fds.png",
-      "dgg.png",
-      "tfsg.png"
-    ],
-    "status": true,
-    "code": "AD104",
-    "stock": 4
-  },
-  {
-    "id": 6,
-    "title": "aire acondicionado",
-    "description": "16000 btu",
-    "price": 95,
-    "category": "electrodomesticos",
-    "thumbnail": [
-      "sgsg.png",
-      "5wedsg.png"
-    ],
-    "status": true,
-    "code": "AD105",
-    "stock": 8
-  },
-  {
     "id": 7,
     "title": "psp 5",
     "description": "playstation 5",
@@ -104,39 +14,36 @@
     "stock": 3
   },
   {
-    "id": 8,
-    "title": "cafetera",
-    "description": "cafetera electrica",
-    "price": 60,
-    "category": "electrodomesticos",
-    "thumbnail": [
-      "dfn.jpg",
-      "oad.jpg"
-    ],
-    "status": true,
-    "code": "AD107",
-    "stock": 10
-  },
-  {
-    "id": 10,
-    "title": "audifonos",
-    "description": "audifonos inalambricos",
-    "price": 35,
-    "category": "electrodomesticos",
+    "id": 13,
+    "title": "caña de pezcar",
+    "description": "caña de pezca deportiva Bassproshop",
+    "price": "75",
+    "category": "camping",
     "thumbnail": [],
     "status": true,
-    "code": "AD109",
-    "stock": 10
+    "code": "DD1200",
+    "stock": "5"
   },
   {
-    "id": 11,
-    "title": "silla gamer",
-    "description": "silla flex gamer akv",
-    "price": 95,
-    "category": "entretenimiento",
+    "id": 14,
+    "title": "carpa coleman",
+    "description": "Carpa de 4 personas",
+    "price": "50",
+    "category": "camping",
     "thumbnail": [],
     "status": true,
-    "code": "AD122",
-    "stock": 3
+    "code": "CAMP001",
+    "stock": "5"
+  },
+  {
+    "id": 15,
+    "title": "nike",
+    "description": "nike retro travis scott",
+    "price": "125",
+    "category": "calzados",
+    "thumbnail": [],
+    "status": true,
+    "code": "NIK002",
+    "stock": "10"
   }
 ]
