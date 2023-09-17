@@ -3,14 +3,16 @@
 
   {{#each products}}
     <div class="card">
+      <img src="/images/{{this.thumbnail}}" alt="Imagen" />
       <h1>{{this.title}}</h1>
       <h3>{{this.description}}</h3>
       <div class="category">
         <h5>category: {{this.category}}</h5>
-        <h3>{{this.price}}usd$</h3>
+        <h3>{{this.price}} usd$</h3>
       </div>
       <button class="delete-product" data-productid="{{this.id}}">Eliminar
         Producto</button>
+
     </div>
   {{/each}}
 </section>

@@ -17,7 +17,7 @@ export class ProductManager {
       if (!title || !description || !code || !price || !stock || !category) {
         throw new Error("Faltan campos por llenar");
       }
-      console.log(title, description, code, price, stock, category, thumbnail);
+
       if (fs.existsSync(this.filePath)) {
         let productsJSON = await fs.promises.readFile(this.filePath, "utf-8");
         const productData = JSON.parse(productsJSON);
@@ -27,7 +27,7 @@ export class ProductManager {
 
         let images = [];
         if (thumbnail) {
-          images.push(...thumbnail);
+          images.push(thumbnail);
         }
 
         const newId =

@@ -3,7 +3,7 @@
 
   <section class="formulario" id="socket" style="margin-bottom: 30px;">
 
-    <form id="realtime-form">
+    <form id="realtime-form" enctype="multipart/form-data">
       <h1>Agregar Producto</h1>
       <label for="title">Titulo</label><br />
       <input
@@ -48,7 +48,7 @@
         id="stock"
       />
       <br /><br />
-      <input type="file" name="" id="" />
+      {{! <input type="file" name="thumbnail" id="thumbnail" /> }}
       <br /><br />
       <button onclick="submit">Agregar producto</button>
     </form>

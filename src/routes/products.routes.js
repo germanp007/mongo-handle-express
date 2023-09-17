@@ -1,7 +1,7 @@
 import { Router } from "express";
 import express from "express";
 import { productsManager } from "../persistencia/index.js";
-
+import { uploader } from "../utils.js";
 const router = Router();
 
 router.use(express.json());
@@ -34,9 +34,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  const { title, description, code, price, stock, category, thumbnails } =
-    req.body;
+router.post("/", uploader.single("thumbnail"), async (req, res) => {
+  const { title, description, code, price, stock, category } = req.body;
+  const thumbnail = req.file.filename;
+  console.log(thumbnail);
   try {
     await productsManager.addProduct(
       title,
@@ -45,12 +46,13 @@ router.post("/", async (req, res) => {
       price,
       stock,
       category,
-      thumbnails
+      thumbnail
     );
 
     if (!title || !description || !code || !price || !stock || !category) {
       throw new Error("Faltan datos");
     } else {
+      //io.emit("imageUploaded", { filename: req.file.originalname });
       res.status(200).json({ message: "Producto agregado correctamente" });
     }
   } catch (error) {

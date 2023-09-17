@@ -29,7 +29,7 @@ server.use(express.static(path.join(__dirname, "/public")));
 server.engine(".hbs", engine({ extname: ".hbs" }));
 server.set("view engine", ".hbs");
 server.set("views", path.join(__dirname, "/views"));
-server.use(express.static(path.join(__dirname, "/public/images")));
+server.use(express.static(path.join(__dirname, "/public")));
 
 /////          Routers
 server.use(viewsRouter);
@@ -50,11 +50,11 @@ io.on("connection", async (socket) => {
       getting.category,
       getting.thumbnail
     );
+
     const productsData = await productsManager.getProducts();
     io.emit("productList", productsData);
   });
   socket.on("deleteProduct", async (getting) => {
-    console.log(typeof getting);
     await productsManager.deleteProduct(getting);
     const productList = await productsManager.getProducts();
     io.emit("productList", productList);

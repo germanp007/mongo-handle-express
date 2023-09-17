@@ -19,7 +19,7 @@ realTimeForm.addEventListener("submit", (e) => {
 document.addEventListener("click", function (event) {
   if (event.target && event.target.classList.contains("delete-product")) {
     const productId = +event.target.dataset.productid;
-    console.log(typeof productId);
+
     webSocket.emit("deleteProduct", productId);
   }
 });
@@ -27,6 +27,7 @@ webSocket.on("productList", (info) => {
   productContainer.innerHTML = info.map((a) => {
     return `
   <div class="card">
+  <img src="${a.thumbnail}" alt="${a.title}">
   <h1>${a.title}</h1>
   <h3>${a.description}</h3>
   <div class="category">
