@@ -11,11 +11,18 @@ realTimeForm.addEventListener("submit", (e) => {
     productJson[key] = value;
   }
   productJson.price = parseInt(productJson.price);
-  console.log(productJson);
+
   webSocket.emit("addProduct", productJson);
-  //realTimeForm.reset();
+  realTimeForm.reset();
 });
 
+document.addEventListener("click", function (event) {
+  if (event.target && event.target.classList.contains("delete-product")) {
+    const productId = +event.target.dataset.productid;
+    console.log(typeof productId);
+    webSocket.emit("deleteProduct", productId);
+  }
+});
 webSocket.on("productList", (info) => {
   productContainer.innerHTML = info.map((a) => {
     return `
@@ -26,7 +33,7 @@ webSocket.on("productList", (info) => {
     <h5>category: ${a.category}</h5>
     <h3>${a.price}usd$</h3>
   </div>
-  <button class="delete-product" data-productid="${a.id}">Eliminar
+  <button class="delete-product" data-productid="${a.id}" >Eliminar
     Producto</button>
 </div>
 `;
