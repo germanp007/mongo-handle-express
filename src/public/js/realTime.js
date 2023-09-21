@@ -18,9 +18,12 @@ realTimeForm.addEventListener("submit", (e) => {
 
 document.addEventListener("click", function (event) {
   if (event.target && event.target.classList.contains("delete-product")) {
+   confimed = confirm("Estas seguro que quieres borrar este producto");
+    if(confirm){
     const productId = +event.target.dataset.productid;
 
     webSocket.emit("deleteProduct", productId);
+    }
   }
 });
 webSocket.on("productList", (info) => {
