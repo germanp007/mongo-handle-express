@@ -1,7 +1,7 @@
 import express from "express";
 import { engine } from "express-handlebars";
 import { routerProducts } from "./routes/products.routes.js";
-import { routerCart } from "./routes/carts.routes.js";
+import { routerCarts } from "./routes/carts.routes.js";
 import { viewsRouter } from "./routes/views.routes.js";
 import { __dirname } from "./utils.js";
 import { conectionDB } from "./config/dbConection.js";
@@ -35,7 +35,7 @@ server.use(express.static(path.join(__dirname, "/public")));
 /////          Routers
 server.use(viewsRouter);
 server.use("/api/products", routerProducts);
-server.use("/api/carts", routerCart);
+server.use("/api/carts", routerCarts);
 
 // Socket server
 io.on("connection", async (socket) => {

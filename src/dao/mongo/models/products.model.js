@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
-const productsCollection = "ecommerce";
+const productsCollection = "products";
 
 const productSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
-  decription: {
+  description: {
     type: String,
     required: true,
   },
