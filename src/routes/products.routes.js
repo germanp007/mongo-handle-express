@@ -1,6 +1,6 @@
 import { Router } from "express";
 import express from "express";
-import { productsManager } from "../persistencia/index.js";
+import { productsManager } from "../dao/index.js";
 import { uploader } from "../utils.js";
 const router = Router();
 

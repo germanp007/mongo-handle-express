@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { cartsManager, productsManager } from "../persistencia/index.js";
+import { cartsManager, productsManager } from "../dao/index.js";
 import express from "express";
 const router = Router();
 router.use(express.json());

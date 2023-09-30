@@ -4,24 +4,25 @@ import { routerProducts } from "./routes/products.routes.js";
 import { routerCart } from "./routes/carts.routes.js";
 import { viewsRouter } from "./routes/views.routes.js";
 import { __dirname } from "./utils.js";
-//import { ProductManager } from "./persistencia/files/productManager.js";
+import { conectionDB } from "./config/dbConection.js";
 import { Server } from "socket.io";
 import path from "path";
-import { productsManager } from "./persistencia/index.js";
+import fs from "fs";
+import { productsManager } from "./dao/index.js";
 
 const server = express();
 const PORT = 3000;
-
 // Server con HTTP
 const httpServer = server.listen(PORT, () => console.log("Servidor activo"));
 
 // Server con Socket.io
 const io = new Server(httpServer);
 
+// Conexion BD
+conectionDB();
 // Midlewares
 server.use(express.urlencoded({ extended: true })); // para formularios
 server.use(express.json()); // para q el server interprete archivos JSON
-
 // Para tener acceso a todo en carpeta public como css, imagenes, etc...
 server.use(express.static(path.join(__dirname, "/public")));
 
@@ -41,6 +42,12 @@ io.on("connection", async (socket) => {
   const products = await productsManager.getProducts();
   socket.emit("productList", products);
   socket.on("addProduct", async (getting) => {
+    console.log(getting);
+    const filePath = `${path.join(
+      __dirname,
+      `/public/images/${getting.imageName}`
+    )}`;
+    console.log(filePath);
     await productsManager.addProduct(
       getting.title,
       getting.description,
@@ -48,9 +55,9 @@ io.on("connection", async (socket) => {
       getting.price,
       getting.stock,
       getting.category,
-      getting.thumbnail
+      getting.image
     );
-
+    await fs.promises.writeFile(filePath, getting.thumbnail);
     const productsData = await productsManager.getProducts();
     io.emit("productList", productsData);
   });

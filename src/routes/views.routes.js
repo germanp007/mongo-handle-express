@@ -1,6 +1,6 @@
 import { Router } from "express";
 import path from "path";
-import { productsManager } from "../persistencia/index.js";
+import { productsManager } from "../dao/index.js";
 import { __dirname } from "../utils.js";
 import fs from "fs";
 

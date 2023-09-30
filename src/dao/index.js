@@ -1,5 +1,5 @@
-import { ProductManager } from "./files/productManager.js";
-import { CartManager } from "./files/cartManager.js";
+import { ProductManager } from "../dao/files/productManager.js";
+import { CartManager } from "../dao/files/cartManager.js";
 import { __dirname } from "../utils.js";
 import path from "path";
 

@@ -1,35 +1,13 @@
 [
   {
     "id": 1,
-    "title": "Adidas",
-    "description": "Adidas All-Star",
-    "price": 75,
+    "title": "converse",
+    "description": "converse",
+    "price": 22,
     "category": "Zapatillas",
     "thumbnail": [],
     "status": true,
     "code": "ZAP001",
-    "stock": "12"
-  },
-  {
-    "id": 2,
-    "title": "Nike",
-    "description": "Nike retro Travis Scott",
-    "price": 110,
-    "category": "Zapatillas",
-    "thumbnail": [],
-    "status": true,
-    "code": "ZAP002",
-    "stock": "12"
-  },
-  {
-    "id": 3,
-    "title": "Converse",
-    "description": "Conver Chuck Taylor",
-    "price": 44,
-    "category": "Zapatillas",
-    "thumbnail": [],
-    "status": true,
-    "code": "ZAP003",
-    "stock": "12"
+    "stock": "10"
   }
 ]
