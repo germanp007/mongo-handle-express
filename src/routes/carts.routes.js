@@ -31,7 +31,9 @@ router.get("/:cartId", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const newCart = req.body;
+    console.log("newCart:", newCart);
     const cartCreated = await cartsServices.createCart(newCart);
+    //console.log(cartCreated);
     res.json({ status: "success", data: cartCreated });
   } catch (error) {
     res.status(400).json({ status: "error", message: error.message });
@@ -40,8 +42,8 @@ router.post("/", async (req, res) => {
 
 router.post("/:cid/product/:pid", async (req, res) => {
   try {
-    const cid = +req.params.cid;
-    const pid = +req.params.pid;
+    const cid = req.params.cid;
+    const pid = req.params.pid;
 
     if (cid && pid) {
       const product = await productsManager.getProductById(pid);
