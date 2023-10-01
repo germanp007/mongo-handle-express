@@ -1,13 +1,1 @@
-[
-  {
-    "id": 1,
-    "title": "converse",
-    "description": "converse",
-    "price": 22,
-    "category": "Zapatillas",
-    "thumbnail": [],
-    "status": true,
-    "code": "ZAP001",
-    "stock": "10"
-  }
-]
+[]

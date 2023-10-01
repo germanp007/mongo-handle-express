@@ -10,8 +10,9 @@ router.use(express.urlencoded({ extended: true }));
 
 router.get("/", async (req, res) => {
   try {
-    const result = await productServices.getProducts();
-    res.json({ status: "success", data: result });
+    const products = await productServices.getProducts();
+    console.log(products);
+    res.json({ status: "success", data: products });
   } catch (error) {
     res.json({
       status: "error",

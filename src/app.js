@@ -27,7 +27,16 @@ server.use(express.json()); // para q el server interprete archivos JSON
 server.use(express.static(path.join(__dirname, "/public")));
 
 //Configurando handlebars
-server.engine(".hbs", engine({ extname: ".hbs" }));
+server.engine(
+  ".hbs",
+  engine({
+    extname: ".hbs",
+    runtimeOptions: {
+      allowProtoPropertiesByDefault: true,
+      allowProtoMethodsByDefault: true,
+    },
+  })
+);
 server.set("view engine", ".hbs");
 server.set("views", path.join(__dirname, "/views"));
 server.use(express.static(path.join(__dirname, "/public")));
