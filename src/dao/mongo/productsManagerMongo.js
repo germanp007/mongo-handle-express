@@ -32,9 +32,10 @@ export class ProductManagerMongo {
   }
   async updateProduct(productID, NewproductData) {
     try {
-      const result = await this.model.updateOne(
-        { _id: productID },
-        NewproductData
+      const result = await this.model.findByIdAndUpdate(
+        productID,
+        NewproductData,
+        { new: true }
       );
       return result;
     } catch (error) {

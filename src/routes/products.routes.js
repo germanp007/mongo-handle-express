@@ -46,8 +46,8 @@ router.post("/", uploader.single("thumbnail"), async (req, res) => {
 router.put("/:productId", async (req, res) => {
   const productId = req.params.productId;
   const bodyReq = req.body;
-  await productServices.updateProduct(productId, bodyReq);
-  res.json({ message: "Producto modificado" });
+  const result = await productServices.updateProduct(productId, bodyReq);
+  res.json({ status: "success", data: result, message: "Producto modificado" });
 });
 
 router.delete("/:productId", async (req, res) => {

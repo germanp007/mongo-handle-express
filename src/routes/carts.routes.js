@@ -1,12 +1,13 @@
 import { Router } from "express";
 import { cartsManager, productsManager } from "../dao/index.js";
+import { cartsServices } from "../dao/index.js";
 import express from "express";
 const router = Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
 router.get("/", async (req, res) => {
-  const cartsList = await cartsManager.getCarts();
+  const cartsList = await cartsServices.getCarts();
   res.json({ data: cartsList });
 });
 
@@ -29,7 +30,8 @@ router.get("/:cartId", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const cartCreated = await cartsManager.addCart();
+    const newCart = req.body;
+    const cartCreated = await cartsServices.createCart(newCart);
     res.json({ status: "success", data: cartCreated });
   } catch (error) {
     res.status(400).json({ status: "error", message: error.message });
