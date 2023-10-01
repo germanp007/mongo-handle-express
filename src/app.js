@@ -8,7 +8,11 @@ import { conectionDB } from "./config/dbConection.js";
 import { Server } from "socket.io";
 import path from "path";
 import fs from "fs";
-import { productsManager } from "./dao/index.js";
+import {
+  chatsServices,
+  productServices,
+  productsManager,
+} from "./dao/index.js";
 
 const server = express();
 const PORT = 3000;
@@ -48,16 +52,10 @@ server.use("/api/carts", routerCarts);
 
 // Socket server
 io.on("connection", async (socket) => {
-  const products = await productsManager.getProducts();
+  const products = await productServices.getProducts();
   socket.emit("productList", products);
   socket.on("addProduct", async (getting) => {
-    console.log(getting);
-    const filePath = `${path.join(
-      __dirname,
-      `/public/images/${getting.imageName}`
-    )}`;
-    console.log(filePath);
-    await productsManager.addProduct(
+    await productServices.createProducts(
       getting.title,
       getting.description,
       getting.code,
@@ -66,13 +64,23 @@ io.on("connection", async (socket) => {
       getting.category,
       getting.image
     );
-    await fs.promises.writeFile(filePath, getting.thumbnail);
-    const productsData = await productsManager.getProducts();
+    //await fs.promises.writeFile(filePath, getting.thumbnail);
+    const productsData = await productServices.getProducts();
     io.emit("productList", productsData);
   });
   socket.on("deleteProduct", async (getting) => {
-    await productsManager.deleteProduct(getting);
-    const productList = await productsManager.getProducts();
+    await productServices.deleteProduct(getting);
+    const productList = await productServices.getProducts();
     io.emit("productList", productList);
+  });
+});
+
+io.on("connection", async (socket) => {
+  let messagesHistory = await chatsServices.getMessages();
+
+  socket.emit("messagesHistory", messagesHistory);
+  socket.on("sendMessage", async (getting) => {
+    console.log(getting);
+    //await chatsServices.addMessage(getting);
   });
 });

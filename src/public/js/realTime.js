@@ -1,5 +1,3 @@
-//import { Socket } from "socket.io";
-
 const webSocket = io();
 const productContainer = document.getElementById("productContainer");
 const realTimeForm = document.getElementById("realtime-form");
@@ -23,7 +21,7 @@ document.addEventListener("click", function (event) {
   if (event.target && event.target.classList.contains("delete-product")) {
     const confirmed = confirm("Estas seguro que quieres borrar este producto");
     if (confirmed) {
-      const productId = +event.target.dataset.productid;
+      const productId = event.target.dataset.productid;
 
       webSocket.emit("deleteProduct", productId);
     }

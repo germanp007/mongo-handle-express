@@ -21,5 +21,8 @@ router.get("/agregar", (req, res) => {
 router.get("/realtimeproducts", async (req, res) => {
   res.render("realTime");
 });
+router.get("/messages", async (req, res) => {
+  res.render("chats");
+});
 
 export { router as viewsRouter };

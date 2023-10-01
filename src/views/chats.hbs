@@ -1,7 +1,16 @@
 <h1>Chat</h1>
 
-<div>
-  <h4>user:</h4><p>Message:</p>
-</div>
+<section>
+  <div id="chat-container"></div>
+</section>
+<form
+  id="realtime-form"
+  enctype="multipart/form-data"
+  style="margin-bottom: 15px;"
+>
+  <label for="input-message">Message:</label>
+  <input type="text" id="input-message" />
+  <button type="submit">Send</button>
+</form>
 <script src="socket.io/socket.io.js"></script>
-<script src="js/realTime.js"></script>
+<script src="js/chat.js"></script>

@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
-const chatCollection = "chat";
+const chatCollection = "mesagges";
 
 const chatSchema = new mongoose.Schema({
-  user: {
-    type: String,
-    required: true,
-    unique: true,
-  },
+  // user: {
+  //   type: String,
+  //   required: true,
+  //   unique: true,
+  // },
   message: {
     type: String,
     required: true,
