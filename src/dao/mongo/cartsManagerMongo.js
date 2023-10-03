@@ -22,7 +22,14 @@ export class CartsManagerMongo {
       throw new Error("No se pudo crear el carrito");
     }
   }
-  // async getCartById() {}
+  async getCartById(cartId) {
+    try{
+      const result = await this.model.findById(cartId);
+      return result;
+    }catch(error){
+      throw new Error("No se pudo encontrar el carrito")
+    }
+  }
   // async updateCart(id, cart) {}
   // async deleteCart() {}
 }
