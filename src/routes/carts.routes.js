@@ -3,8 +3,7 @@ import { cartsManager, productsManager } from "../dao/index.js";
 import { cartsServices } from "../dao/index.js";
 import express from "express";
 const router = Router();
-router.use(express.json());
-router.use(express.urlencoded({ extended: true }));
+
 
 router.get("/", async (req, res) => {
   const cartsList = await cartsServices.getCarts();
@@ -13,8 +12,8 @@ router.get("/", async (req, res) => {
 
 router.get("/:cartId", async (req, res) => {
   try {
-    const cartId = parseInt(req.params.cartId);
-    const cartById = await cartsManager.getCartById(cartId);
+    const cartId = req.params.cartId;
+    const cartById = await cartsServices.getCartById(cartId);
 
     if (cartById) {
       res.json({ data: cartById });
