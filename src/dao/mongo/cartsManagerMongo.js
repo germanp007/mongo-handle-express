@@ -12,17 +12,35 @@ export class CartsManagerMongo {
       throw new Error("getCarts:", "No se pudo obtener la lista de carritos");
     }
   }
-  async createCart(cart) {
+  async createCart(newCart) {
+    console.log(newCart);
     try {
-      console.log("createCart", cart);
-      const result = await this.mondel.create(cart);
-      console.log("result", result);
+      const result = await this.model.create(newCart);
       return result;
     } catch (error) {
       throw new Error("No se pudo crear el carrito");
     }
   }
-  // async getCartById() {}
-  // async updateCart(id, cart) {}
-  // async deleteCart() {}
+
+  async addProduct(cartId, productId) {
+    try {
+      const result = await this.model.findById(cartId);
+      result.products.push(productId);
+      result.save();
+      return result;
+    } catch (error) {
+      throw new Error("No se encontro el producto seleccionado");
+    }
+  }
+
+  async getCartPopulate(cartId) {
+    try {
+      let populateProducts = await this.model
+        .findById(cartId)
+        .populate("products");
+      return populateProducts;
+    } catch (error) {
+      throw new Error("No se encontro el cart seleccionado");
+    }
+  }
 }
