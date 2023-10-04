@@ -1,4 +1,4 @@
-# coder-house-Web Socket y HTTP
+# Challenge agregando Products y Cart a Mongo, usando Populate para llenar los carritos con los productos
 
 
 
