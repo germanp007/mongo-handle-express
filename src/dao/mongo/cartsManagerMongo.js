@@ -15,7 +15,7 @@ export class CartsManagerMongo {
   async createCart() {
     try {
       const cart = {}
-      const result = await this.mondel.create();
+      const result = await this.model.create();
      
       return result;
     } catch (error) {
