@@ -7,5 +7,23 @@
   "stock": 15,
   "gallery": ["asfsg.png","ohperg.png","gdwgtyp.png","ewqgdh.png"],
   "category": "Deportes"
+  },
+  {
+    "title":"bate de beisbol",
+    "description": "bate spalding 24",
+    "price": 35,
+    "code": "DEP004",
+    "stock": 10,
+    "gallery": ["fesdgsh.jpg","wetyt.jpg","etrhfj.png"],
+    "category": "deportes"
+  },
+  {
+    "title": "raqueta de paddel",
+    "description": "raqueta winbledon paddel",
+    "price": 45,
+    "code": "DEP006",
+    "stock": 12,
+    "gallery": ["rhngfj.png","ewthfd.png","qwrss.jpg","wetthgfnj.jpg"],
+    "category": "deportes"
   }
 ]
