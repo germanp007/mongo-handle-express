@@ -25,5 +25,13 @@
     "stock": 12,
     "gallery": ["rhngfj.png","ewthfd.png","qwrss.jpg","wetthgfnj.jpg"],
     "category": "deportes"
+  },
+  {
+    "title":"caña de pesca",
+    "description": "caña para pesca deportiva honolulu",
+    "price": 25,
+    "code": "DEP007",
+    "stock": 10,
+    "gallery": ["swebdfbhgf.jpg","etwegdsh.png","rehfgjdhg.png","hjtykgfg.jpg","wtergdhth.png"]
   }
 ]
