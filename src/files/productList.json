@@ -1,1 +1,11 @@
-[]
+[
+  {
+  "title": "snorker",
+  "description": "snorker para buceo",
+  "price": 45,
+  "code": "DEP005",
+  "stock": 15,
+  "gallery": ["asfsg.png","ohperg.png","gdwgtyp.png","ewqgdh.png"],
+  "category": "Deportes"
+  }
+]
