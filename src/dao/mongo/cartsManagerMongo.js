@@ -12,6 +12,14 @@ export class CartsManagerMongo {
       throw new Error("getCarts:", "No se pudo obtener la lista de carritos");
     }
   }
+   async getCartById(cartId) {
+    try {
+      const carts = await this.model.findById(cartId);
+      return carts;
+    } catch (error) {
+      throw new Error("getCartById:", "No se pudo obtener el carrito seleccionado");
+    }
+  }
   async createCart(newCart) {
     console.log(newCart);
     try {
