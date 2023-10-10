@@ -14,14 +14,14 @@ export class CartsManagerMongo {
   }
    async getCartById(cartId) {
     try {
-      const carts = await this.model.findById(cartId);
+      const carts = await this.model.findById(cartId).populate('products.productId');
       return carts;
     } catch (error) {
       throw new Error("getCartById:", "No se pudo obtener el carrito seleccionado");
     }
   }
   async createCart(newCart) {
-    console.log(newCart);
+    
     try {
       const result = await this.model.create(newCart);
       return result;
@@ -32,23 +32,70 @@ export class CartsManagerMongo {
 
   async addProduct(cartId, productId) {
     try {
-      const result = await this.model.findById(cartId);
-      result.products.push(productId);
-      result.save();
+      const cart = await this.getCartById(cartId);
+     const existingProduct  = cart.products.findIndex(product => product.productId == productId);
+     
+     if(existingProduct >= 0) {
+      cart.products[existingProduct].quantity += 1; 
+     } else {
+
+       const newProductCart = {
+           productId:productId,
+           quantity:1
+       }
+
+       cart.products.push(newProductCart);
+     }
+     
+      const result = await this.model.findByIdAndUpdate(cartId,cart, {new:true});
       return result;
+  } catch (error) {
+      console.log(error.message);
+      throw new Error("No se pudo agregar el producto al carrito");
+  }
+  }
+
+  async deleteProduct(cartId,productId){
+    try {
+      const cart = await this.getCartById(cartId);
+      console.log(cart)
+      const productExist = cart.products.find(ele => ele.productId._id == productId);
+      console.log(productExist)
+      if(productExist){
+        const newProducts = cart.products.filter(ele => ele.productId._id != productId);
+        cart.products = newProducts;
+        const result = await this.model.findByIdAndUpdate(cartId,cart, {new:true});
+        return result;
+      }
     } catch (error) {
-      throw new Error("No se encontro el producto seleccionado");
+      throw new Error("el producto no ha sido agregado");
     }
   }
 
-  async getCartPopulate(cartId) {
+  async deleteCart(cartId){
     try {
-      let populateProducts = await this.model
-        .findById(cartId)
-        .populate("products");
-      return populateProducts;
+      const result = await this.model.findByIdAndDelete({_id:cartId });
+      return result;
+
+      
     } catch (error) {
-      throw new Error("No se encontro el cart seleccionado");
+      throw new Error("No se pudo borrar el cart seleccionado");
+    }
+  }
+
+  async updateProductQuantity(cartId,productId,newQuantity){
+    try {
+      const cart = await this.getCartById(cartId);
+      const productIndex = cart.products.findIndex(ele=>ele.productId._id == productId);
+      if(productIndex >= 0){
+        cart.products[productIndex].quantity = newQuantity;
+        const result = await this.model.findByIdAndUpdate(cartId, cart, {new: true})
+        return result;
+      }else{
+        throw new Error("El producto no se puede actualizar porque no ha sido agregado");
+      }
+    } catch (error) {
+      throw new Error("No se pudo actualizar el cart seleccionado");
     }
   }
 }

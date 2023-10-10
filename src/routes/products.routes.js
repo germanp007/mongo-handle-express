@@ -11,7 +11,7 @@ router.use(express.urlencoded({ extended: true }));
 router.get("/", async (req, res) => {
   try {
     const products = await productServices.getProducts();
-    console.log(products);
+    
     res.json({ status: "success", data: products });
   } catch (error) {
     res.json({
@@ -34,8 +34,6 @@ router.get("/:id", async (req, res) => {
 router.post("/", uploader.single("thumbnail"), async (req, res) => {
   try {
     const product = req.body;
-    console.log(product);
-    //const thumbnail = req.file.filename;
     await productServices.createProducts(product);
 
     res.json({ status: "success", data: product });
