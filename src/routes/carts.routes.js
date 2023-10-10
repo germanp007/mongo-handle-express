@@ -9,7 +9,11 @@ router.get("/", async (req, res) => {
   const cartsList = await cartsServices.getCarts();
   res.json({ data: cartsList });
 });
-
+router.get("/:cid", async (req,res)=> {
+  const cartId = req.params.cid;
+  const result = await cartsServices.getCartById(cartId);
+  res.json({status:"success", data: result});
+})
 router.post("/", async (req, res) => {
   try {
     const newCart = {};
