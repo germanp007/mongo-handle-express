@@ -1,0 +1,19 @@
+<h1>Lista de products</h1>
+<section class="card-container">
+  {{#each newList}}
+    <div class="card">
+      <h1>{{this.title}}</h1>
+      <h3>{{this.description}}</h3>
+      <div class="category">
+        <h5>category: {{this.category}}</h5>
+        <h3>{{this.price}} usd$</h3>
+      </div>
+    </div>
+  {{/each}}
+
+</section>
+<div>
+  <button>Previous</button>
+  <button>Next</button>
+</div>
+<script src="js/products.js"></script>

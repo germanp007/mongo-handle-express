@@ -30,6 +30,20 @@ export class ProductManagerMongo {
       throw new Error("No existe un producto con ese ID");
     }
   }
+  async getProductPaginate() {
+    try {
+      const productsList = await this.model.paginate(
+        {},
+        { page: 1, lean: true }
+      );
+      return productsList;
+    } catch (error) {
+      throw new Error(
+        "getCatPaginate:",
+        "No se pudo modificar el carrito seleccionado"
+      );
+    }
+  }
   async updateProduct(productID, NewproductData) {
     try {
       const result = await this.model.findByIdAndUpdate(

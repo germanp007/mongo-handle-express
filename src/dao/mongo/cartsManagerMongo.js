@@ -25,25 +25,7 @@ export class CartsManagerMongo {
       );
     }
   }
-  // async getCartPaginate(cartId) {
-  //   try {
-  //     const cart = await this.model.paginate(
-  //       {},
-  //       { limit: 5, page: 1, lean: true }
-  //     );
-  //     const cartUpdated = {
-  //       status: "success",
-  //       payload: cart.docs[0].products,
-  //       totalPages: cart.totalPages,
-  //     };
-  //     console.log(cartUpdated);
-  //   } catch (error) {
-  //     throw new Error(
-  //       "getCatPaginate:",
-  //       "No se pudo modificar el carrito seleccionado"
-  //     );
-  //   }
-  // }
+
   async createCart(newCart) {
     try {
       const result = await this.model.create(newCart);

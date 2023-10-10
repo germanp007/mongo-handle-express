@@ -24,5 +24,25 @@ router.get("/realtimeproducts", async (req, res) => {
 router.get("/messages", async (req, res) => {
   res.render("chats");
 });
-
+router.get("/products", async (req, res) => {
+  const limit = req.query.limit || 5;
+  const productList = await productServices.getProductPaginate();
+  const newList = {
+    status: "success",
+    payload: productList.docs,
+    totalPages: productList.totalPages,
+    page: productList.page,
+    prevPage: productList.prevPage,
+    nextPage: productList.nextPage,
+    hasPrevPage: productList.hasPrevPage,
+    hasNextPage: productList.hasNextPage,
+    prevLink: productList.hasPrevPage
+      ? `/api/products?page=${productList.prevPage}&limit=${limit}`
+      : null,
+    nextLink: productList.hasNextPage
+      ? `/api/products?page=${productList.nextPage}&limit=${limit}`
+      : null,
+  };
+  res.render("products", { newList: newList.payload });
+});
 export { router as viewsRouter };
