@@ -7,7 +7,10 @@
 }
 h1,
 h2 {
+  -webkit-text-stroke: 0.3px black;
   text-align: center;
+  color: white;
+  background-color: rgb(206, 206, 226);
 }
 nav {
   display: flex;
@@ -29,6 +32,8 @@ a {
 }
 section {
   min-height: calc(100vh - 164px);
+  
+  background-color: rgb(206, 206, 226);
   display: grid;
 }
 .card {
@@ -42,8 +47,14 @@ section {
   width: 300px;
   height: 200px;
   margin: 10px;
+  background-color: white;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  
   cursor: pointer;
+}
+.card h1{
+  color: black;
+  background-color: transparent;
 }
 .card-container {
   display: flex;
@@ -67,4 +78,23 @@ input {
   height: 25px;
   width: 250px;
   padding-left: 5px;
+}
+.prev-next{
+  display: flex;
+  justify-content: center;
+  background-color: rgb(206, 206, 226);
+}
+.prev-next a{
+  padding: 5px 10px;
+  background-color: rgb(131, 131, 180);
+  border-radius: 5px;
+  margin: 0 10px 10px;
+  color:white;
+}
+.add-cart{
+  padding: 5px 10px;
+  background-color: rgb(131, 131, 180);
+  border-radius: 5px;
+  margin: 0 10px 10px;
+  color:white;
 }

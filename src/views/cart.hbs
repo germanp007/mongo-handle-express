@@ -1,0 +1,15 @@
+<h1>Shopping Cart</h1>
+<section class="card-container">
+  {{#each cart.products}}
+    <div class="card">
+      <h1>{{this.products.title}}</h1>
+      <h3>{{this.description}}</h3>
+      <div class="category">
+        <h5>category: {{this.category}}</h5>
+        <h3>{{this.price}} usd$</h3>
+      </div>
+      {{!-- <button class="add-cart" onclick="">add to cart</button> --}}
+    </div>
+  {{/each}}
+
+</section>

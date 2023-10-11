@@ -1,6 +1,6 @@
 import { Router } from "express";
 import path from "path";
-import { productServices } from "../dao/index.js";
+import { productServices, cartsServices } from "../dao/index.js";
 import { __dirname } from "../utils.js";
 import fs from "fs";
 
@@ -46,4 +46,9 @@ router.get("/products", async (req, res) => {
   };
   res.render("products", { newList });
 });
+router.get("/cart", async (req, res) => {
+  const cart = await cartsServices.getCartById("65256d089d331a04303ef2ec");
+  console.log('carrido', cart.products[0].productId.title)
+  res.render('cart', {cart})
+})
 export { router as viewsRouter };
