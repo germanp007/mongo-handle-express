@@ -26,7 +26,8 @@ router.get("/messages", async (req, res) => {
 });
 router.get("/products", async (req, res) => {
   const limit = req.query.limit || 5;
-  const productList = await productServices.getProductPaginate();
+  const page = req.query.page || 1;
+  const productList = await productServices.getProductPaginate(limit, page);
   const newList = {
     status: "success",
     payload: productList.docs,
@@ -37,12 +38,12 @@ router.get("/products", async (req, res) => {
     hasPrevPage: productList.hasPrevPage,
     hasNextPage: productList.hasNextPage,
     prevLink: productList.hasPrevPage
-      ? `/api/products?page=${productList.prevPage}&limit=${limit}`
+      ? `/products?page=${productList.prevPage}&limit=${limit}`
       : null,
     nextLink: productList.hasNextPage
-      ? `/api/products?page=${productList.nextPage}&limit=${limit}`
+      ? `/products?page=${productList.nextPage}&limit=${limit}`
       : null,
   };
-  res.render("products", { newList: newList.payload });
+  res.render("products", { newList });
 });
 export { router as viewsRouter };

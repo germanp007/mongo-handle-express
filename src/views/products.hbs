@@ -1,6 +1,6 @@
 <h1>Lista de products</h1>
 <section class="card-container">
-  {{#each newList}}
+  {{#each newList.payload}}
     <div class="card">
       <h1>{{this.title}}</h1>
       <h3>{{this.description}}</h3>
@@ -13,7 +13,7 @@
 
 </section>
 <div>
-  <button>Previous</button>
-  <button>Next</button>
+  <button id="prevButton" data-link="{{newList.prevLink}}">Previous</button>
+  <button id="nextButton" data-link="{{newList.nextLink}}">Next</button>
 </div>
 <script src="js/products.js"></script>

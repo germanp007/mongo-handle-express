@@ -30,11 +30,11 @@ export class ProductManagerMongo {
       throw new Error("No existe un producto con ese ID");
     }
   }
-  async getProductPaginate() {
+  async getProductPaginate(limit, page) {
     try {
       const productsList = await this.model.paginate(
         {},
-        { page: 1, lean: true }
+        { limit: limit, page: page, lean: true }
       );
       return productsList;
     } catch (error) {
