@@ -51,6 +51,9 @@ router.get("/cart", async (req, res) => {
   console.log('carrito', cart.products[0].productId.title),
     console.log("carrito", cart.products[1].productId.title),
     console.log("carrito", cart.products[2].productId.title),
+    console.log("carrito", cart.products[3].productId.title),
+    console.log("carrito", cart.products[4].productId.title),
+    console.log("carrito", cart.products[5].productId.title),
     
   res.render('cart', {cart})
 })
