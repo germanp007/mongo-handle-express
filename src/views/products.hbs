@@ -8,13 +8,18 @@
         <h5>category: {{this.category}}</h5>
         <h3>{{this.price}} usd$</h3>
       </div>
-      <button class="add-cart" onclick="addToCart(`{{this._id}}`)">add to cart</button>
+      <a class="add-cart" onclick="addToCart(`{{this._id}}`)">add to cart</a>
     </div>
   {{/each}}
 
 </section>
 <div class="prev-next">
-  <a href="{{newList.prevLink}}" ><strong> &lt;&lt; Previous</strong></a>
-  <a href="{{newList.nextLink}}" ><strong> Next &gt;&gt;</strong></a> 
+  {{#if newList.prevLink}}
+    <a href="{{newList.prevLink}}"><strong> &lt;&lt; Previous</strong></a>
+  {{/if}}
+  <a id="go-to-cart">ir a carrito</a>
+  {{#if newList.nextLink}}
+    <a href="{{newList.nextLink}}"><strong> Next &gt;&gt;</strong></a>
+  {{/if}}
 </div>
 <script src="js/products.js"></script>

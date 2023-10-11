@@ -44,18 +44,13 @@ router.get("/products", async (req, res) => {
       ? `/products?page=${productList.nextPage}&limit=${limit}`
       : null,
   };
+  console.log(newList);
   res.render("products", { newList });
 });
 router.get("/cart", async (req, res) => {
   const cart = await cartsServices.getCartById("65256d089d331a04303ef2ec");
-  const cartList = cart.products
-  console.log('carrito', cart.products[0].productId.title),
-    console.log("carrito", cart.products[1].productId.title),
-    console.log("carrito", cart.products[2].productId.title),
-    console.log("carrito", cart.products[3].productId.title),
-    console.log("carrito", cart.products[4].productId.title),
-    console.log("carrito", cart.products[5].productId.title),
-    
-  res.render('cart', {cartList})
-})
+  const cartList = cart.products;
+  console.log("carrito", cartList);
+  res.render("cart", { cartList });
+});
 export { router as viewsRouter };

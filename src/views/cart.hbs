@@ -1,14 +1,14 @@
 <h1>Shopping Cart</h1>
 <section class="card-container">
-  {{#each cartList.productId}}
+  {{#each cartList}}
     <div class="card">
       <h1>{{this.productId.title}}</h1>
       <h3>{{this.productId.description}}</h3>
       <div class="category">
         <h5>category: {{this.productId.category}}</h5>
-        <h3>{{this.productId.price}} usd$</h3>
+        <h3>Quantity: {{this.quantity}}</h3>
       </div>
-      
+
     </div>
   {{/each}}
 
