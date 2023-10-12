@@ -11,24 +11,26 @@ realTimeForm.addEventListener("submit", (e) => {
   for (const [key, value] of form.entries()) {
     productJson[key] = value;
   }
-  productJson.price = parseInt(productJson.price);
-  productJson.imageName = productJson.thumbnail.name;
+  productJson.price = productJson.price;
+ productJson.thumbnail = productJson.thumbnail.name;
+  console.log(productJson)
   webSocket.emit("addProduct", productJson);
   realTimeForm.reset();
 });
 
 document.addEventListener("click", function (event) {
+  console.log(event.target.classList.contains("delete-product"))
   if (event.target && event.target.classList.contains("delete-product")) {
     const confirmed = confirm("Estas seguro que quieres borrar este producto");
     if (confirmed) {
       const productId = event.target.dataset.productid;
-
+      console.log(productId)
       webSocket.emit("deleteProduct", productId);
     }
   }
 });
 webSocket.on("productList", (info) => {
-  console.log(info);
+  
   productContainer.innerHTML = info.map((a) => {
     return `
   <div class="card">
@@ -39,7 +41,7 @@ webSocket.on("productList", (info) => {
     <h5>category: ${a.category}</h5>
     <h3>${a.price}usd$</h3>
   </div>
-  <button class="delete-product" data-productid="${a.id}" >Eliminar
+  <button class="delete-product" data-productid="${a._id}" >Eliminar
     Producto</button>
 </div>
 `;

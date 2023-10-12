@@ -53,18 +53,14 @@ server.use("/api/carts", routerCarts);
 // Socket server
 io.on("connection", async (socket) => {
   const products = await productServices.getProducts();
+  console.log('Cliente Conectado');
   socket.emit("productList", products);
   socket.on("addProduct", async (getting) => {
+    
     await productServices.createProducts(
-      getting.title,
-      getting.description,
-      getting.code,
-      getting.price,
-      getting.stock,
-      getting.category,
-      getting.image
+      getting
     );
-    //await fs.promises.writeFile(filePath, getting.thumbnail);
+    
     const productsData = await productServices.getProducts();
     io.emit("productList", productsData);
   });
