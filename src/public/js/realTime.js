@@ -11,7 +11,7 @@ realTimeForm.addEventListener("submit", (e) => {
   for (const [key, value] of form.entries()) {
     productJson[key] = value;
   }
-  productJson.price = parseInt(productJson.price);
+  productJson.price = productJson.price;
   productJson.imageName = productJson.thumbnail.name;
   webSocket.emit("addProduct", productJson);
   realTimeForm.reset();
@@ -28,7 +28,7 @@ document.addEventListener("click", function (event) {
   }
 });
 webSocket.on("productList", (info) => {
-  console.log(info);
+  
   productContainer.innerHTML = info.map((a) => {
     return `
   <div class="card">
@@ -39,7 +39,7 @@ webSocket.on("productList", (info) => {
     <h5>category: ${a.category}</h5>
     <h3>${a.price}usd$</h3>
   </div>
-  <button class="delete-product" data-productid="${a.id}" >Eliminar
+  <button class="delete-product" data-productid="${a._id}" >Eliminar
     Producto</button>
 </div>
 `;
