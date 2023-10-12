@@ -14,6 +14,14 @@
 
 </section>
 <div class="prev-next">
+   <label for="limit">Mostrar:</label>
+  <select id="limit" name="limit" onchange="changeLimit()">
+    <option  >-</option>
+  <option value="5" >5</option>
+  <option value="8" >8</option>
+  <option value="10">10</option>
+  <option value="20">20</option>
+</select>
   {{#if newList.prevLink}}
     <a href="{{newList.prevLink}}"><strong> &lt;&lt; Previous</strong></a>
   {{/if}}
