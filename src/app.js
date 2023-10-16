@@ -1,8 +1,11 @@
 import express from "express";
+import session from "express-session";
+import MongoStore from "connect-mongo";
 import { engine } from "express-handlebars";
 import { routerProducts } from "./routes/products.routes.js";
 import { routerCarts } from "./routes/carts.routes.js";
 import { viewsRouter } from "./routes/views.routes.js";
+import { routerSessions } from "./routes/sessions.routes.js";
 import { __dirname } from "./utils.js";
 import { conectionDB } from "./config/dbConection.js";
 import { Server } from "socket.io";
@@ -24,6 +27,7 @@ const io = new Server(httpServer);
 
 // Conexion BD
 conectionDB();
+
 // Midlewares
 server.use(express.urlencoded({ extended: true })); // para formularios
 server.use(express.json()); // para q el server interprete archivos JSON
@@ -45,10 +49,23 @@ server.set("view engine", ".hbs");
 server.set("views", path.join(__dirname, "/views"));
 server.use(express.static(path.join(__dirname, "/public")));
 
+/// Conf Session 
+server.use(session({
+ 
+  store: MongoStore.create({
+      ttl: 180, 
+      mongoUrl: "mongodb+srv://germanp007:nati23032023@clustergap.ggconiz.mongodb.net/ecommerce?retryWrites=true&w=majority"
+  }),
+  secret: "secretGerman", 
+  resave: true,
+  saveUninitialized: true 
+}))
+
 /////          Routers
 server.use(viewsRouter);
 server.use("/api/products", routerProducts);
 server.use("/api/carts", routerCarts);
+server.use('/api/sessions', routerSessions);
 
 // Socket server
 io.on("connection", async (socket) => {

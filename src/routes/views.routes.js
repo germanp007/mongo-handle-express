@@ -25,6 +25,7 @@ router.get("/messages", async (req, res) => {
   res.render("chats");
 });
 router.get("/products", async (req, res) => {
+  if (req.session.name) {
   const limit = req.query.limit || 5;
   const page = req.query.page || 1;
   const productList = await productServices.getProductPaginate(limit, page);
@@ -43,9 +44,18 @@ router.get("/products", async (req, res) => {
     nextLink: productList.hasNextPage
       ? `/products?page=${productList.nextPage}&limit=${limit}`
       : null,
+      
   };
-  console.log(newList);
-  res.render("products", { newList });
+ 
+    res.render("products", {
+      newList,
+      message: `Bienvenido ${req.session.name}`
+    });
+    
+  } else{
+    res.render('products', { error: 'Debes iniciar session para ver la lista de productos'})
+  }
+  
 });
 router.get("/cart", async (req, res) => {
   const cart = await cartsServices.getCartById("65256d089d331a04303ef2ec");
@@ -53,4 +63,11 @@ router.get("/cart", async (req, res) => {
   console.log("carrito", cartList);
   res.render("cart", { cartList });
 });
+
+router.get('/signup', (req,res)=>{
+  res.render('signup')
+})
+router.get('/login', (req,res)=>{
+  res.render('login')
+})
 export { router as viewsRouter };
