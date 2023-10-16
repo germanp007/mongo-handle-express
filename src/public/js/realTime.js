@@ -12,8 +12,12 @@ realTimeForm.addEventListener("submit", (e) => {
     productJson[key] = value;
   }
   productJson.price = productJson.price;
+<<<<<<< HEAD
  productJson.thumbnail = productJson.thumbnail.name;
   console.log(productJson)
+=======
+  productJson.imageName = productJson.thumbnail.name;
+>>>>>>> 9837bf420315cf767ac328178b1565a7ca7023fb
   webSocket.emit("addProduct", productJson);
   realTimeForm.reset();
 });

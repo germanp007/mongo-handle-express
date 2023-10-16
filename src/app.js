@@ -73,10 +73,14 @@ io.on("connection", async (socket) => {
   console.log('Cliente Conectado');
   socket.emit("productList", products);
   socket.on("addProduct", async (getting) => {
+<<<<<<< HEAD
     
     await productServices.createProducts(
       getting
     );
+=======
+    await productServices.createProducts(getting);
+>>>>>>> 9837bf420315cf767ac328178b1565a7ca7023fb
     
     const productsData = await productServices.getProducts();
     io.emit("productList", productsData);
