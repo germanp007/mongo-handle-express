@@ -3,6 +3,7 @@ import path from "path";
 import { productServices, cartsServices } from "../dao/index.js";
 import { __dirname } from "../utils.js";
 import fs from "fs";
+import { registerModel } from "../dao/mongo/models/sessions.model.js";
 
 // let products = JSON.parse(
 //   fs.readFileSync(path.join(__dirname, "/files/productList.json"))
@@ -11,12 +12,14 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const products = await productServices.getProducts();
-
-  console.log(products);
+  if (!req.session.rol) {
+    return res.redirect("/login");
+  }
   res.render("home", { products: products });
 });
-router.get("/agregar", (req, res) => {
-  res.render("agregar");
+router.get("/agregar", async (req, res) => {
+  let admin = req.session.rol == "admin" ? true : false;
+  res.render("agregar", { admin });
 });
 router.get("/realtimeproducts", async (req, res) => {
   res.render("realTime");
@@ -26,36 +29,35 @@ router.get("/messages", async (req, res) => {
 });
 router.get("/products", async (req, res) => {
   if (req.session.name) {
-  const limit = req.query.limit || 5;
-  const page = req.query.page || 1;
-  const productList = await productServices.getProductPaginate(limit, page);
-  const newList = {
-    status: "success",
-    payload: productList.docs,
-    totalPages: productList.totalPages,
-    page: productList.page,
-    prevPage: productList.prevPage,
-    nextPage: productList.nextPage,
-    hasPrevPage: productList.hasPrevPage,
-    hasNextPage: productList.hasNextPage,
-    prevLink: productList.hasPrevPage
-      ? `/products?page=${productList.prevPage}&limit=${limit}`
-      : null,
-    nextLink: productList.hasNextPage
-      ? `/products?page=${productList.nextPage}&limit=${limit}`
-      : null,
-      
-  };
- 
+    const limit = req.query.limit || 5;
+    const page = req.query.page || 1;
+    const productList = await productServices.getProductPaginate(limit, page);
+    const newList = {
+      status: "success",
+      payload: productList.docs,
+      totalPages: productList.totalPages,
+      page: productList.page,
+      prevPage: productList.prevPage,
+      nextPage: productList.nextPage,
+      hasPrevPage: productList.hasPrevPage,
+      hasNextPage: productList.hasNextPage,
+      prevLink: productList.hasPrevPage
+        ? `/products?page=${productList.prevPage}&limit=${limit}`
+        : null,
+      nextLink: productList.hasNextPage
+        ? `/products?page=${productList.nextPage}&limit=${limit}`
+        : null,
+    };
+
     res.render("products", {
       newList,
-      message: `Bienvenido ${req.session.name}`
+      message: `Bienvenido ${req.session.name}`,
     });
-    
-  } else{
-    res.render('products', { error: 'Debes iniciar session para ver la lista de productos'})
+  } else {
+    res.render("products", {
+      error: "Debes iniciar session para ver la lista de productos",
+    });
   }
-  
 });
 router.get("/cart", async (req, res) => {
   const cart = await cartsServices.getCartById("65256d089d331a04303ef2ec");
@@ -64,10 +66,10 @@ router.get("/cart", async (req, res) => {
   res.render("cart", { cartList });
 });
 
-router.get('/signup', (req,res)=>{
-  res.render('signup')
-})
-router.get('/login', (req,res)=>{
-  res.render('login')
-})
+router.get("/signup", (req, res) => {
+  res.render("signup");
+});
+router.get("/login", (req, res) => {
+  res.render("login");
+});
 export { router as viewsRouter };

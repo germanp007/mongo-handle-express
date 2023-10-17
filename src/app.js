@@ -49,39 +49,34 @@ server.set("view engine", ".hbs");
 server.set("views", path.join(__dirname, "/views"));
 server.use(express.static(path.join(__dirname, "/public")));
 
-/// Conf Session 
-server.use(session({
- 
-  store: MongoStore.create({
-      ttl: 180, 
-      mongoUrl: "mongodb+srv://germanp007:nati23032023@clustergap.ggconiz.mongodb.net/ecommerce?retryWrites=true&w=majority"
-  }),
-  secret: "secretGerman", 
-  resave: true,
-  saveUninitialized: true 
-}))
+/// Conf Session
+server.use(
+  session({
+    store: MongoStore.create({
+      ttl: 180,
+      mongoUrl:
+        "mongodb+srv://germanp007:nati23032023@clustergap.ggconiz.mongodb.net/ecommerce?retryWrites=true&w=majority",
+    }),
+    secret: "secretGerman",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 /////          Routers
 server.use(viewsRouter);
 server.use("/api/products", routerProducts);
 server.use("/api/carts", routerCarts);
-server.use('/api/sessions', routerSessions);
+server.use("/api/sessions", routerSessions);
 
 // Socket server
 io.on("connection", async (socket) => {
   const products = await productServices.getProducts();
-  console.log('Cliente Conectado');
+  console.log("Cliente Conectado");
   socket.emit("productList", products);
   socket.on("addProduct", async (getting) => {
-<<<<<<< HEAD
-    
-    await productServices.createProducts(
-      getting
-    );
-=======
     await productServices.createProducts(getting);
->>>>>>> 9837bf420315cf767ac328178b1565a7ca7023fb
-    
+
     const productsData = await productServices.getProducts();
     io.emit("productList", productsData);
   });
