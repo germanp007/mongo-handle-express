@@ -64,7 +64,7 @@ server.use(
   })
 );
 
-//// Conf Passport
+//// Conf Passport  // debe estar arriba de los routers
 initializePassport();
 server.use(passport.initialize());
 server.use(passport.session());
