@@ -10,7 +10,8 @@ import { __dirname } from "./utils.js";
 import { conectionDB } from "./config/dbConection.js";
 import { Server } from "socket.io";
 import path from "path";
-import fs from "fs";
+import passport from "passport";
+import { initializePassport } from "./config/passport.config.js";
 import {
   chatsServices,
   productServices,
@@ -62,6 +63,11 @@ server.use(
     saveUninitialized: true,
   })
 );
+
+//// Conf Passport
+initializePassport();
+server.use(passport.initialize());
+server.use(passport.session());
 
 /////          Routers
 server.use(viewsRouter);
