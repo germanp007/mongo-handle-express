@@ -1,8 +1,10 @@
 import { Router } from "express";
 import passport from "passport";
+import { config } from "../config/config.js";
 import { registerModel } from "../dao/mongo/models/sessions.model.js";
 const router = Router();
 
+// Rutas de registro
 router.post(
   "/register",
   passport.authenticate("signupLocalStrategy", {
@@ -16,6 +18,8 @@ router.post(
 router.get("/fail-signup", (req, res) => {
   res.render("signup", { error: "No se pudo registrar el usuario" });
 });
+
+//Rutas de Login
 router.post(
   "/login",
   passport.authenticate("loginLocalStrategy", {
@@ -32,6 +36,22 @@ router.post(
 router.get("/fail-login", (req, res) => {
   res.render("login", { error: "No se pudo iniciar session" });
 });
+
+// Ruta registro Git-hub
+
+router.get("/signup-github", passport.authenticate("signupGithubStrategy"));
+//callback con github
+router.get(
+  config.github.callbackUrl,
+  passport.authenticate("signupGithubStrategy", {
+    failureRedirect: "/api/sessions/fail-login",
+  }),
+  (req, res) => {
+    res.redirect("/products");
+  }
+);
+
+//Ruta LOGOUT
 router.get("/logout", async (req, res) => {
   try {
     req.session.destroy((error) => {

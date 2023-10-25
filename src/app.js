@@ -1,6 +1,7 @@
 import express from "express";
 import session from "express-session";
 import MongoStore from "connect-mongo";
+import { config } from "./config/config.js";
 import { engine } from "express-handlebars";
 import { routerProducts } from "./routes/products.routes.js";
 import { routerCarts } from "./routes/carts.routes.js";
@@ -55,10 +56,9 @@ server.use(
   session({
     store: MongoStore.create({
       ttl: 180,
-      mongoUrl:
-        "mongodb+srv://germanp007:nati23032023@clustergap.ggconiz.mongodb.net/ecommerce?retryWrites=true&w=majority",
+      mongoUrl: config.mongo.url,
     }),
-    secret: "secretGerman",
+    secret: config.server.secretSession,
     resave: true,
     saveUninitialized: true,
   })
