@@ -1,4 +1,4 @@
-import { Router } from "express";
+import e, { Router } from "express";
 import path from "path";
 import { productServices, cartsServices } from "../dao/index.js";
 import { __dirname } from "../utils.js";
@@ -12,7 +12,7 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const products = await productServices.getProducts();
-  if (!req.session.rol) {
+  if (!req.session.name) {
     return res.redirect("/login");
   }
   res.render("home", { products: products });
@@ -67,9 +67,15 @@ router.get("/cart", async (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
+  if (req.session.name) {
+    return res.redirect("/products");
+  }
   res.render("signup");
 });
 router.get("/login", (req, res) => {
+  if (req.session.name) {
+    return res.redirect("/products");
+  }
   res.render("login");
 });
 export { router as viewsRouter };
