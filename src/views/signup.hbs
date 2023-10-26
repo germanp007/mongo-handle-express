@@ -3,21 +3,35 @@
 <h1 style="color: rgb(240, 53, 53);">{{error}}</h1>
 <section>
 
-  <div style="display: flex; justify-content: center; align-items: start;">
-    <form action="/api/sessions/register" method="post">
+  <div
+    style="display: flex;flex-direction: column; justify-content: start; align-items: center;height: 180px;"
+  >
+    <form
+      action="/api/sessions/register"
+      method="post"
+      style="display: flex;flex-direction: column;align-items: center;"
+    >
       <input type="text" name="name" placeholder="ingrese su nombre" />
       <br /><br />
       <input type="text" name="email" placeholder="ingrese su e-mail" />
       <br /><br />
       <input type="text" name="password" placeholder="ingrese su contraseña" />
       <br /><br />
-      <button>registrar usuario</button>
+      <button class="signup-button" style="margin-bottom: 10px;">registrar
+        usuario</button>
+
     </form>
-    <a href="/api/sessions/signup-github">
+    <div>
+      <a href="/api/sessions/signup-github">
 
-      <button>Registrarse con GitHub <i class="fab fa-github"></i></button>
-    </a>
-
-    <p>Ya tienes una cuenta? <a href="/login">Iniciar Sesión</a></p>
+        <button class="github-button">Registrarse con GitHub
+          <img
+            src="/images/github.png"
+            alt="github"
+            class="github-icon"
+          /></button>
+      </a>
+    </div>
   </div>
+
 </section>

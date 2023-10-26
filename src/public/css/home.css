@@ -1,7 +1,6 @@
 * {
   padding: 0%;
   margin: 0%;
-  
 }
 .body {
   height: 75vh;
@@ -21,7 +20,6 @@ nav {
   font-size: 30px;
   padding: 1.5rem;
 }
-
 
 a {
   text-decoration: none;
@@ -102,4 +100,19 @@ input {
   border-radius: 5px;
   margin: 0 10px 10px;
   color: white;
+}
+.github-icon {
+  width: 30px;
+  height: 30px;
+}
+.github-button,
+.signup-button {
+  border: 1px solid black;
+  padding: 4px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  background-color: white;
 }

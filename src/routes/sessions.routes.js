@@ -47,6 +47,7 @@ router.get(
     failureRedirect: "/api/sessions/fail-login",
   }),
   (req, res) => {
+    req.session.name = req.user.name;
     res.redirect("/products");
   }
 );

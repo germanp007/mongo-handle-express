@@ -80,7 +80,6 @@ export const initializePassport = () => {
       async (accesToken, refreshToken, profile, done) => {
         try {
           const user = await registerModel.findOne({ email: profile.username });
-          console.log(profile);
 
           if (user) {
             //usuario registrado
@@ -91,7 +90,7 @@ export const initializePassport = () => {
           const newUser = {
             name: profile._json.name,
             email: profile.username,
-            password: createHash(profile._id),
+            password: createHash(profile.id),
             rol: "usuario",
           };
 
