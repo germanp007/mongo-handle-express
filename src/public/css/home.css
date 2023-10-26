@@ -115,4 +115,11 @@ input {
   align-items: center;
   color: black;
   background-color: white;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.github-button:hover,
+.signup-button:hover {
+  background-color: black;
+  color: antiquewhite;
 }
