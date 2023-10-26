@@ -1,4 +1,4 @@
-# Challenge agregando Products y Cart a Mongo, usando Populate para llenar los carritos con los productos
+# Creado el login y sign up con github y passport y passport-local
 
 
 
