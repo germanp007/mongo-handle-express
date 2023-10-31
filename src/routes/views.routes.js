@@ -15,7 +15,8 @@ router.get("/", async (req, res) => {
   if (!req.session.name) {
     return res.redirect("/login");
   }
-  res.render("home", { products: products });
+  let admin = req.session.rol == 'admin' ? true : false;
+  res.render("home", { products: products, admin });
 });
 router.get("/agregar", async (req, res) => {
   let admin = req.session.rol == "admin" ? true : false;
