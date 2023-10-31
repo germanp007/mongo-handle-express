@@ -23,7 +23,8 @@ router.get("/agregar", async (req, res) => {
   res.render("agregar", { admin });
 });
 router.get("/realtimeproducts", async (req, res) => {
-  res.render("realTime");
+  let admin = req.session.rol == 'admin' ? true : false;
+  res.render("realTime", {admin});
 });
 router.get("/messages", async (req, res) => {
   res.render("chats");
