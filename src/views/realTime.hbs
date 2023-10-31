@@ -2,7 +2,7 @@
 <div style="display:grid; grid-template-columns: 1fr 1fr;">
 
   <section class="formulario" id="socket" style="margin-bottom: 30px;">
-
+    {{#if admin}}
     <form id="realtime-form" enctype="multipart/form-data">
       <h1>Agregar Producto</h1>
       <label for="title">Titulo</label><br />
@@ -52,7 +52,9 @@
       <br /><br />
       <button onclick="submit">Agregar producto</button>
     </form>
-
+    {{else}}
+    <h1 style="color: rgb(240, 53, 53);">Debe ser administrador para acceder</h1>
+  {{/if}}
   </section>
   <div style="border-left: rgb(95, 95, 95) solid 1px; margin-bottom: 20px;">
     <h2>Listado de productos</h2>
