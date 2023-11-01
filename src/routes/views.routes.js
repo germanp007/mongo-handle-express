@@ -12,10 +12,10 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const products = await productServices.getProducts();
-  if (!req.session.name) {
+  if (!req.session.first_name) {
     return res.redirect("/login");
   }
-  let admin = req.session.rol == 'admin' ? true : false;
+  let admin = req.session.rol == "admin" ? true : false;
   res.render("home", { products: products, admin });
 });
 router.get("/agregar", async (req, res) => {
@@ -23,14 +23,14 @@ router.get("/agregar", async (req, res) => {
   res.render("agregar", { admin });
 });
 router.get("/realtimeproducts", async (req, res) => {
-  let admin = req.session.rol == 'admin' ? true : false;
-  res.render("realTime", {admin});
+  let admin = req.session.rol == "admin" ? true : false;
+  res.render("realTime", { admin });
 });
 router.get("/messages", async (req, res) => {
   res.render("chats");
 });
 router.get("/products", async (req, res) => {
-  if (req.session.name) {
+  if (req.session.first_name) {
     const limit = req.query.limit || 5;
     const page = req.query.page || 1;
     const productList = await productServices.getProductPaginate(limit, page);
@@ -53,7 +53,7 @@ router.get("/products", async (req, res) => {
 
     res.render("products", {
       newList,
-      message: `Bienvenido ${req.session.name}`,
+      message: `Bienvenido ${req.session.first_name}`,
     });
   } else {
     res.render("products", {
@@ -69,13 +69,13 @@ router.get("/cart", async (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  if (req.session.name) {
+  if (req.session.first_name) {
     return res.redirect("/products");
   }
   res.render("signup");
 });
 router.get("/login", (req, res) => {
-  if (req.session.name) {
+  if (req.session.first_name) {
     return res.redirect("/products");
   }
   res.render("login");

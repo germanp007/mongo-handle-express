@@ -41,7 +41,6 @@ export class CartsManagerMongo {
       const existingProduct = cart.products.find(
         (product) => product.productId._id == productId
       );
-      console.log(existingProduct);
 
       if (existingProduct) {
         existingProduct.quantity += 1;

@@ -16,10 +16,10 @@ export const initializePassport = () => {
       },
 
       async (req, username, password, done) => {
-        const { name } = req.body;
+        const { first_name, last_name, age } = req.body;
         try {
           const user = await registerModel.findOne({ email: username });
-          console.log(user);
+
           if (user) {
             //usuario registrado
             return done(null, false);
@@ -27,10 +27,12 @@ export const initializePassport = () => {
           //usuario no registrado
 
           const newUser = {
-            name,
+            first_name,
+            last_name,
             email: username,
+            age,
             password: createHash(password),
-            rol: username === "adminCoder@coder.com" ? "admin" : "usuario",
+            rol: username === "adminCoder@coder.com" ? "admin" : "user",
           };
 
           const userCreated = await registerModel.create(newUser);
