@@ -1,4 +1,4 @@
-# Creado el login y sign up con github y passport y passport-local
+# Implementando el model propuesto en clase con el ID del Cart y usuario con lastname, firstname y age, en conjunto con rutas protegidas por si no es admin o si es admin poder agregar productos con http y tiempo real.
 
 
 
