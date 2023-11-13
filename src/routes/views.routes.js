@@ -1,6 +1,6 @@
 import e, { Router } from "express";
 import path from "path";
-import { productServices, cartsServices } from "../dao/index.js";
+import { productDao, cartsDao } from "../dao/index.js";
 import { __dirname } from "../utils.js";
 import fs from "fs";
 import { registerModel } from "../dao/mongo/models/sessions.model.js";
@@ -11,7 +11,7 @@ import { registerModel } from "../dao/mongo/models/sessions.model.js";
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const products = await productServices.getProducts();
+  const products = await productDao.getProducts();
   if (!req.session.first_name) {
     return res.redirect("/login");
   }
@@ -33,7 +33,7 @@ router.get("/products", async (req, res) => {
   if (req.session.first_name) {
     const limit = req.query.limit || 5;
     const page = req.query.page || 1;
-    const productList = await productServices.getProductPaginate(limit, page);
+    const productList = await productDao.getProductPaginate(limit, page);
     const newList = {
       status: "success",
       payload: productList.docs,
@@ -62,7 +62,7 @@ router.get("/products", async (req, res) => {
   }
 });
 router.get("/cart", async (req, res) => {
-  const cart = await cartsServices.getCartById("65256d089d331a04303ef2ec");
+  const cart = await cartsDao.getCartById("65256d089d331a04303ef2ec");
   const cartList = cart.products;
   console.log("carrito", cartList);
   res.render("cart", { cartList });

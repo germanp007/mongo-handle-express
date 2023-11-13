@@ -13,11 +13,7 @@ import { Server } from "socket.io";
 import path from "path";
 import passport from "passport";
 import { initializePassport } from "./config/passport.config.js";
-import {
-  chatsServices,
-  productServices,
-  productsManager,
-} from "./dao/index.js";
+import { chatsDao, productDao, cartsDao } from "./dao/index.js";
 
 const server = express();
 const PORT = 3000;
@@ -77,24 +73,24 @@ server.use("/api/sessions", routerSessions);
 
 // Socket server
 io.on("connection", async (socket) => {
-  const products = await productServices.getProducts();
+  const products = await productDao.getProducts();
   console.log("Cliente Conectado");
   socket.emit("productList", products);
   socket.on("addProduct", async (getting) => {
-    await productServices.createProducts(getting);
+    await productDao.createProducts(getting);
 
-    const productsData = await productServices.getProducts();
+    const productsData = await productDao.getProducts();
     io.emit("productList", productsData);
   });
   socket.on("deleteProduct", async (getting) => {
-    await productServices.deleteProduct(getting);
-    const productList = await productServices.getProducts();
+    await productDao.deleteProduct(getting);
+    const productList = await productDao.getProducts();
     io.emit("productList", productList);
   });
 });
 
 io.on("connection", async (socket) => {
-  let messagesHistory = await chatsServices.getMessages();
+  let messagesHistory = await chatsDao.getMessages();
 
   socket.emit("messagesHistory", messagesHistory);
   socket.on("sendMessage", async (getting) => {

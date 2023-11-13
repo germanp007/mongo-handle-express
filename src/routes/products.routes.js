@@ -1,7 +1,6 @@
 import { Router } from "express";
 import express from "express";
-import { productServices } from "../dao/index.js";
-import { productsManager } from "../dao/index.js";
+import { productDao } from "../dao/index.js";
 import { uploader } from "../utils.js";
 const router = Router();
 
@@ -10,8 +9,8 @@ router.use(express.urlencoded({ extended: true }));
 
 router.get("/", async (req, res) => {
   try {
-    const products = await productServices.getProducts();
-    
+    const products = await productDao.getProducts();
+
     res.json({ status: "success", data: products });
   } catch (error) {
     res.json({
@@ -23,7 +22,7 @@ router.get("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   const productId = +req.params.id;
-  const product = await productsManager.getProductById(productId);
+  const product = await productDao.getProductById(productId);
   if (product) {
     res.json({ data: product });
   } else {
@@ -34,7 +33,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", uploader.single("thumbnail"), async (req, res) => {
   try {
     const product = req.body;
-    await productServices.createProducts(product);
+    await productDao.createProducts(product);
 
     res.json({ status: "success", data: product });
   } catch (error) {
@@ -45,13 +44,13 @@ router.post("/", uploader.single("thumbnail"), async (req, res) => {
 router.put("/:productId", async (req, res) => {
   const productId = req.params.productId;
   const bodyReq = req.body;
-  const result = await productServices.updateProduct(productId, bodyReq);
+  const result = await productDao.updateProduct(productId, bodyReq);
   res.json({ status: "success", data: result, message: "Producto modificado" });
 });
 
 router.delete("/:productId", async (req, res) => {
   const id = req.params.productId;
-  const result = await productServices.deleteProduct(id);
+  const result = await productDao.deleteProduct(id);
   res.json({
     status: "success",
     data: result,
