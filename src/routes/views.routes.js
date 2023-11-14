@@ -12,7 +12,7 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   const products = await productDao.getProducts();
-  if (!req.session.first_name) {
+  if (!req.session.name) {
     return res.redirect("/login");
   }
   let admin = req.session.rol == "admin" ? true : false;
@@ -30,7 +30,7 @@ router.get("/messages", async (req, res) => {
   res.render("chats");
 });
 router.get("/products", async (req, res) => {
-  if (req.session.first_name) {
+  if (req.session.name) {
     const limit = req.query.limit || 5;
     const page = req.query.page || 1;
     const productList = await productDao.getProductPaginate(limit, page);
@@ -53,7 +53,7 @@ router.get("/products", async (req, res) => {
 
     res.render("products", {
       newList,
-      message: `Bienvenido ${req.session.first_name}`,
+      message: `Bienvenido ${req.session.name}`,
     });
   } else {
     res.render("products", {
@@ -69,13 +69,13 @@ router.get("/cart", async (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  if (req.session.first_name) {
+  if (req.session.name) {
     return res.redirect("/products");
   }
   res.render("signup");
 });
 router.get("/login", (req, res) => {
-  if (req.session.first_name) {
+  if (req.session.name) {
     return res.redirect("/products");
   }
   res.render("login");

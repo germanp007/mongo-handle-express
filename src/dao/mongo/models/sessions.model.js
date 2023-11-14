@@ -8,7 +8,6 @@ const registerSchema = new mongoose.Schema({
   },
   last_name: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
@@ -16,7 +15,6 @@ const registerSchema = new mongoose.Schema({
   },
   age: {
     type: Number,
-    required: true,
   },
   password: {
     type: String,
@@ -29,8 +27,8 @@ const registerSchema = new mongoose.Schema({
   },
   rol: {
     type: String,
-    enum: ["admin", "user"],
-    default: "user",
+    enum: ["admin", "usuario"],
+    default: "usuario",
   },
 });
 

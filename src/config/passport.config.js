@@ -90,7 +90,7 @@ export const initializePassport = () => {
           //usuario no registrado
 
           const newUser = {
-            name: profile._json.name,
+            first_name: profile._json.name,
             email: profile.username,
             password: createHash(profile.id),
             rol: "usuario",

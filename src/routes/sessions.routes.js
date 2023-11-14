@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { config } from "../config/config.js";
-import { registerModel } from "../dao/mongo/models/sessions.model.js";
+import { sessionDao } from "../dao/index.js";
 const router = Router();
 
 // Rutas de registro
@@ -27,7 +27,7 @@ router.post(
   }),
   async (req, res) => {
     const { email } = req.body;
-    const user = await registerModel.findOne({ email: email });
+    const user = await sessionDao.getUserByEmail(email);
     req.session.first_name = user.first_name;
     req.session.rol = user.rol;
     res.redirect("/products");
@@ -47,7 +47,8 @@ router.get(
     failureRedirect: "/api/sessions/fail-login",
   }),
   (req, res) => {
-    req.session.name = req.user.name;
+    req.session.name = req.user.first_name;
+    console.log(req);
     res.redirect("/products");
   }
 );

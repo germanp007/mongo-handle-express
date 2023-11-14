@@ -1,6 +1,6 @@
 import { registerModel } from "./models/sessions.model.js";
 
-export class UsersManagerMongo {
+export class SessionManagerMongo {
   constructor() {
     this.model = registerModel;
   }
