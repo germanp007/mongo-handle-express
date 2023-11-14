@@ -28,7 +28,7 @@ router.post(
   async (req, res) => {
     const { email } = req.body;
     const user = await sessionDao.getUserByEmail(email);
-    req.session.first_name = user.first_name;
+    req.session.name = user.first_name;
     req.session.rol = user.rol;
     res.redirect("/products");
   }

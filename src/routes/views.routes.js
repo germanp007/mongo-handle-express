@@ -2,12 +2,7 @@ import e, { Router } from "express";
 import path from "path";
 import { productDao, cartsDao } from "../dao/index.js";
 import { __dirname } from "../utils.js";
-import fs from "fs";
-import { registerModel } from "../dao/mongo/models/sessions.model.js";
 
-// let products = JSON.parse(
-//   fs.readFileSync(path.join(__dirname, "/files/productList.json"))
-// );
 const router = Router();
 
 router.get("/", async (req, res) => {
