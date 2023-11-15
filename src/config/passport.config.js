@@ -4,6 +4,7 @@ import GithubStrategy from "passport-github2";
 import { createHash, validationHash } from "../utils.js";
 import { registerModel } from "../dao/mongo/models/sessions.model.js";
 import { config } from "./config.js";
+import { UsersService } from "../service/users.service.js";
 
 export const initializePassport = () => {
   // Local Strategy
@@ -18,7 +19,7 @@ export const initializePassport = () => {
       async (req, username, password, done) => {
         const { first_name, last_name, age } = req.body;
         try {
-          const user = await registerModel.findOne({ email: username });
+          const user = await UsersService.getUserByEmail(username);
 
           if (user) {
             //usuario registrado
@@ -35,7 +36,7 @@ export const initializePassport = () => {
             rol: username === "adminCoder@coder.com" ? "admin" : "user",
           };
 
-          const userCreated = await registerModel.create(newUser);
+          const userCreated = await UsersService.createUsers(newUser);
           return done(null, userCreated);
         } catch (error) {
           return done(error);
@@ -54,7 +55,7 @@ export const initializePassport = () => {
       },
       async (username, password, done) => {
         try {
-          const user = await registerModel.findOne({ email: username });
+          const user = await UsersService.getUserByEmail(username);
 
           if (!user) {
             return done(null, false);
@@ -81,7 +82,7 @@ export const initializePassport = () => {
       },
       async (accesToken, refreshToken, profile, done) => {
         try {
-          const user = await registerModel.findOne({ email: profile.username });
+          const user = await UsersService.getUserByEmail(profile.username);
 
           if (user) {
             //usuario registrado
@@ -93,10 +94,10 @@ export const initializePassport = () => {
             first_name: profile._json.name,
             email: profile.username,
             password: createHash(profile.id),
-            rol: "usuario",
+            rol: "user",
           };
 
-          const userCreated = await registerModel.create(newUser);
+          const userCreated = await UsersService.createUsers(newUser);
           return done(null, userCreated);
         } catch (error) {
           done(error);

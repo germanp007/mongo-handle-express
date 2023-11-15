@@ -6,6 +6,7 @@ import { ProductManagerMongo } from "./mongo/productsManagerMongo.js";
 import { CartsManagerMongo } from "./mongo/cartsManagerMongo.js";
 import { ChatManagerMongo } from "./mongo/chatManagerMongo.js";
 import { SessionManagerMongo } from "./mongo/sessionManagerMongo.js";
+
 export const productsManager = new ProductManager(
   path.join(__dirname, "files/productList.json")
 );
