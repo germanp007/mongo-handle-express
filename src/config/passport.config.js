@@ -33,7 +33,7 @@ export const initializePassport = () => {
             email: username,
             age,
             password: createHash(password),
-            rol: username === "adminCoder@coder.com" ? "admin" : "user",
+            rol: username === config.admin ? "admin" : "user",
           };
 
           const userCreated = await UsersService.createUsers(newUser);
