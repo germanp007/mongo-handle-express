@@ -33,4 +33,25 @@ export class ProductController {
       res.status(422).json({ status: "error", message: error.message });
     }
   };
+
+  static updateProduct = async (req, res) => {
+    const productId = req.params.productId;
+    const bodyReq = req.body;
+    const result = await ProductsService.updateProduct(productId, bodyReq);
+    res.json({
+      status: "success",
+      data: result,
+      message: "Producto modificado",
+    });
+  };
+
+  static delete = async (req, res) => {
+    const id = req.params.productId;
+    const result = await ProductsService.deleteProduct(id);
+    res.json({
+      status: "success",
+      data: result,
+      message: "Producto borrado correctamente",
+    });
+  };
 }

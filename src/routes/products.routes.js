@@ -1,7 +1,7 @@
 import { Router } from "express";
 import express from "express";
 import { uploader } from "../utils.js";
-import { ProductController } from "../controller/products.controller.js";
+import { ProductController } from "../controller/index.js";
 const router = Router();
 
 router.use(express.json());
@@ -17,20 +17,7 @@ router.post(
   ProductController.createProducts
 );
 
-router.put("/:productId", async (req, res) => {
-  const productId = req.params.productId;
-  const bodyReq = req.body;
-  const result = await ProductsService.updateProduct(productId, bodyReq);
-  res.json({ status: "success", data: result, message: "Producto modificado" });
-});
+router.put("/:productId", ProductController.updateProduct);
 
-router.delete("/:productId", async (req, res) => {
-  const id = req.params.productId;
-  const result = await ProductsService.deleteProduct(id);
-  res.json({
-    status: "success",
-    data: result,
-    message: "Producto borrado correctamente",
-  });
-});
+router.delete("/:productId", ProductController.delete);
 export { router as routerProducts };
