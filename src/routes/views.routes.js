@@ -59,7 +59,6 @@ router.get("/products", async (req, res) => {
 router.get("/cart", async (req, res) => {
   const cart = await cartsDao.getCartById("65256d089d331a04303ef2ec");
   const cartList = cart.products;
-  console.log("carrito", cartList);
   res.render("cart", { cartList });
 });
 

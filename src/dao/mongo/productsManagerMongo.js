@@ -8,7 +8,7 @@ export class ProductManagerMongo {
   async createProducts(productData) {
     try {
       const result = await this.model.create(productData);
-      console.log(result)
+
       return result;
     } catch (error) {
       console.log("createProduct", error.message);

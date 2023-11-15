@@ -1,23 +1,24 @@
 import { Router } from "express";
 import express from "express";
 import { uploader } from "../utils.js";
-import { ProductController } from "../controller/index.js";
+import { ProductsController } from "../controller/products.controller.js";
 const router = Router();
 
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.get("/", ProductController.getProducts);
+router.get("/", ProductsController.getProducts);
 
-router.get("/:id", ProductController.getProductById);
+router.get("/:id", ProductsController.getProductById);
 
 router.post(
   "/",
   uploader.single("thumbnail"),
-  ProductController.createProducts
+  ProductsController.createProducts
 );
 
-router.put("/:productId", ProductController.updateProduct);
+router.put("/:productId", ProductsController.updateProduct);
 
-router.delete("/:productId", ProductController.delete);
+router.delete("/:productId", ProductsController.delete);
+
 export { router as routerProducts };

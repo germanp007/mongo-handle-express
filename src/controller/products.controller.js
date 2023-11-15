@@ -1,6 +1,6 @@
 import { ProductsService } from "../service/products.service.js";
 
-export class ProductController {
+export class ProductsController {
   static getProducts = async (req, res) => {
     try {
       const products = await ProductsService.getProducts();
