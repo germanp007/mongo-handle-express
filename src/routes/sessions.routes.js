@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { config } from "../config/config.js";
-import { sessionDao } from "../dao/index.js";
+import { SessionController } from "../controller/session.controller.js";
 const router = Router();
 
 // Rutas de registro
@@ -10,14 +10,10 @@ router.post(
   passport.authenticate("signupLocalStrategy", {
     failureRedirect: "/api/sessions/fail-signup",
   }),
-  async (req, res) => {
-    res.render("login", { message: "usuario registrado exitosamente" });
-  }
+  SessionController.signup
 );
 
-router.get("/fail-signup", (req, res) => {
-  res.render("signup", { error: "No se pudo registrar el usuario" });
-});
+router.get("/fail-signup", SessionController.signupFail);
 
 //Rutas de Login
 router.post(
@@ -25,17 +21,9 @@ router.post(
   passport.authenticate("loginLocalStrategy", {
     failureRedirect: "/api/sessions/fail-login",
   }),
-  async (req, res) => {
-    const { email } = req.body;
-    const user = await sessionDao.getUserByEmail(email);
-    req.session.name = user.first_name;
-    req.session.rol = user.rol;
-    res.redirect("/products");
-  }
+  SessionController.login
 );
-router.get("/fail-login", (req, res) => {
-  res.render("login", { error: "No se pudo iniciar session" });
-});
+router.get("/fail-login", SessionController.loginFail);
 
 // Ruta registro Git-hub
 
@@ -46,26 +34,10 @@ router.get(
   passport.authenticate("signupGithubStrategy", {
     failureRedirect: "/api/sessions/fail-login",
   }),
-  (req, res) => {
-    req.session.name = req.user.first_name;
-    console.log(req);
-    res.redirect("/products");
-  }
+  SessionController.githubLogin
 );
 
 //Ruta LOGOUT
-router.get("/logout", async (req, res) => {
-  try {
-    req.session.destroy((error) => {
-      if (error)
-        return (
-          res, render("products", { error: "No se pudo cerrar la session" })
-        );
-    });
-    res.redirect("/login");
-  } catch (error) {
-    console.log(error);
-  }
-});
+router.get("/logout", SessionController.logout);
 
 export { router as routerSessions };

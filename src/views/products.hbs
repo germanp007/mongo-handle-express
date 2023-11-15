@@ -1,39 +1,43 @@
 <h1>Lista de products</h1>
-<section >
+<section>
   <div style="display: flex; justify-content: center;">
-     {{#if message}}
-   <h1 style="color: rgb(31, 115, 31);display: inline;margin-right: 4px;">{{message}}</h1>
-   <a href="/api/sessions/logout" style="height:25px;padding:3px 15px;background-color: brown;border-radius: 5px;">logout</a>
+    {{#if message}}
+      <h1
+        style="color: rgb(31, 115, 31);display: inline;margin-right: 4px;"
+      >{{message}}</h1>
+      <a
+        href="/api/sessions/logout"
+        style="height:25px;padding:3px 15px;background-color: brown;border-radius: 5px;"
+      >logout</a>
     {{/if}}
     {{#if error}}
-   <h1 style="color: rgb(240, 53, 53);">{{error}}</h1>
+      <h1 style="color: rgb(240, 53, 53);">{{error}}</h1>
     {{/if}}
-   </div>
-   <div class="card-container" style="width: 100vw;">
-  {{#each newList.payload}}
-    <div class="card">
-      <h1>{{this.title}}</h1>
-      <h3>{{this.description}}</h3>
-      <div class="category">
-        <h5>category: {{this.category}}</h5>
-        <h3>{{this.price}} usd$</h3>
+  </div>
+  <div class="card-container" style="width: 100vw;">
+    {{#each newList.payload}}
+      <div class="card">
+        <h1>{{this.title}}</h1>
+        <h3>{{this.description}}</h3>
+        <div class="category">
+          <h5>category: {{this.category}}</h5>
+          <h3>{{this.price}} usd$</h3>
+        </div>
+        <a class="add-cart" onclick="addToCart(`{{this._id}}`)">add to cart</a>
       </div>
-      <a class="add-cart" onclick="addToCart(`{{this._id}}`)">add to cart</a>
-    </div>
-  {{/each}}
-</div>
+    {{/each}}
+  </div>
 </section>
-
 
 <div class="prev-next">
   <label for="limit">Mostrar:</label>
   <select id="limit" name="limit" onchange="changeLimit()">
-    <option  >-</option>
-  <option value="5" >5</option>
-  <option value="8" >8</option>
-  <option value="10">10</option>
-  <option value="20">20</option>
-</select>
+    <option>-</option>
+    <option value="5">5</option>
+    <option value="8">8</option>
+    <option value="10">10</option>
+    <option value="20">20</option>
+  </select>
   {{#if newList.prevLink}}
     <a href="{{newList.prevLink}}"><strong> &lt;&lt; Previous</strong></a>
   {{/if}}
