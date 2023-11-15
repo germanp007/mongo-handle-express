@@ -2,10 +2,10 @@ import { productDao } from "../dao/index.js";
 
 export class ProductsService {
   static getProductsPaginate(query, options) {
-    return productDao.getProductsPaginate(query, options);
+    return productDao.getProductPaginate(query, options);
   }
   static createProduct(infoProduct) {
-    return productDao.createProduct(infoProduct);
+    return productDao.createProducts(infoProduct);
   }
   static getProducts() {
     return productDao.getProducts();
