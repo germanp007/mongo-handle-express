@@ -17,7 +17,7 @@ export class SessionController {
     req.session.name = userFront.full_name;
     req.session.email = email;
     req.session.rol = user.rol;
-    res.redirect("/products");
+    res.redirect("/profile");
   };
 
   static loginFail = (req, res) => {
@@ -27,7 +27,7 @@ export class SessionController {
   static githubLogin = (req, res) => {
     req.session.name = req.user.first_name;
     console.log(req);
-    res.redirect("/products");
+    res.redirect("/profile");
   };
   static logout = async (req, res) => {
     try {

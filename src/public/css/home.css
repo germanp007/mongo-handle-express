@@ -36,7 +36,7 @@ a:hover {
   padding: 1.5rem;
 }
 section {
-  min-height: calc(100vh - 164px);
+  min-height: calc(100vh - 144px);
   background-color: rgb(206, 206, 226);
   display: grid;
 }
@@ -158,4 +158,18 @@ img {
   background-color: brown;
   border-radius: 5px;
   display: inline-table;
+}
+
+.chat {
+  color: rgb(131, 131, 180);
+}
+.chat input {
+  border-radius: 5px;
+  border: 1px solid rgb(131, 131, 180);
+}
+.input-chat-container {
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: end;
 }

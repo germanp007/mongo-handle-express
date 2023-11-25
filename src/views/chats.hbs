@@ -1,16 +1,20 @@
-<h1>Chat</h1>
-
 <section>
-  <div id="chat-container"></div>
+  <h1>Chat</h1>
+  {{#if admin}}
+    <h1 style="color: rgb(31, 115, 31); ">Debes ser Usuario para acceder al Chat
+
+    </h1>
+    <div id="chat-container"></div>
+  {{else}}
+    <div class="input-chat-container">
+
+      <form class="chat" id="realtime-form" enctype="multipart/form-data">
+        <label for="input-message">Message:</label>
+        <input type="text" id="input-message" />
+        <button type="submit" class="delete-product">Send</button>
+      </form>
+    </div>
+  {{/if}}
 </section>
-<form
-  id="realtime-form"
-  enctype="multipart/form-data"
-  style="margin-bottom: 15px;"
->
-  <label for="input-message">Message:</label>
-  <input type="text" id="input-message" />
-  <button type="submit">Send</button>
-</form>
 <script src="socket.io/socket.io.js"></script>
 <script src="js/chat.js"></script>

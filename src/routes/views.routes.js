@@ -11,7 +11,11 @@ router.get("/agregar", ViewController.addProductView);
 router.get("/realtimeproducts", ViewController.realTimeView);
 
 router.get("/messages", async (req, res) => {
-  res.render("chats");
+  if (!req.user) {
+    return res.redirect("/login");
+  }
+  const admin = req.user.rol === "admin" ? true : false;
+  return res.render("chats", { admin });
 });
 router.get("/products", ViewController.getProductPaginate);
 
