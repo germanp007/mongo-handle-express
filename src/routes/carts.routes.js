@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { cartsDao, productDao } from "../dao/index.js";
 import { CartsController } from "../controller/carts.controller.js";
+//import { TicketsController } from "../controller/ticket.controller.js";
 
 const router = Router();
 
@@ -22,4 +23,5 @@ router.delete("/:cid", CartsController.deleteCart);
 router.delete("/:cid/products/:pid", CartsController.deleteProductInCart);
 
 router.put("/:cid/products/:pid", CartsController.updateProductQuantity);
+
 export { router as routerCarts };
