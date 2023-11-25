@@ -33,12 +33,11 @@ webSocket.on("productList", (info) => {
   productContainer.innerHTML = info.map((a) => {
     return `
   <div class="card">
-  <img src="public/images/${a.thumbnail}" alt="${a.title}">
   <h1>${a.title}</h1>
   <h3>${a.description}</h3>
   <div class="category">
     <h5>category: ${a.category}</h5>
-    <h3>${a.price}usd$</h3>
+    <h1>${a.price}usd$</h1>
   </div>
   <button class="delete-product" data-productid="${a._id}" >Eliminar
     Producto</button>

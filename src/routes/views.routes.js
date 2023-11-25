@@ -19,5 +19,5 @@ router.get("/cart", ViewController.getCartByIdView);
 
 router.get("/signup", ViewController.signupView);
 router.get("/login", ViewController.loginView);
-
+router.get("/profile", ViewController.profileView);
 export { router as viewsRouter };

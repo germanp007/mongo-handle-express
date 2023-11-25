@@ -20,7 +20,7 @@ export class ViewController {
   };
   static getProductPaginate = async (req, res) => {
     if (req.session.name) {
-      const limit = req.query.limit || 5;
+      const limit = req.query.limit || 8;
       const page = req.query.page || 1;
       const productList = await ProductsService.getProductsPaginate(
         limit,
@@ -45,7 +45,6 @@ export class ViewController {
 
       res.render("products", {
         newList,
-        message: `Bienvenido ${req.session.name}`,
       });
     } else {
       res.render("products", {
@@ -70,5 +69,17 @@ export class ViewController {
       return res.redirect("/products");
     }
     res.render("login");
+  };
+  static profileView = (req, res) => {
+    if (req.session.name) {
+      const profile = req.session.name;
+      const email = req.session.email;
+
+      console.log(req.session);
+      return res.render("profile", {
+        message: `Bienvenido ${profile} ${email}`,
+      });
+    }
+    return res.redirect("/login");
   };
 }

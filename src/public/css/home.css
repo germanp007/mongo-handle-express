@@ -1,6 +1,7 @@
 * {
   padding: 0%;
   margin: 0%;
+  font-family: "Montserrat", sans-serif;
 }
 .body {
   height: 75vh;
@@ -9,7 +10,7 @@ h1,
 h2 {
   -webkit-text-stroke: 0.3px black;
   text-align: center;
-  color: white;
+  color: rgb(131, 131, 180);
   background-color: rgb(206, 206, 226);
 }
 nav {
@@ -17,7 +18,7 @@ nav {
   justify-content: flex-end;
   gap: 20px;
   background-color: rgb(131, 131, 180);
-  font-size: 30px;
+  font-size: 20px;
   padding: 1.5rem;
 }
 
@@ -25,15 +26,17 @@ a {
   text-decoration: none;
   color: white;
 }
+a:hover {
+  color: black;
+}
 .footer {
   color: white;
   background-color: rgb(131, 131, 180);
-  font-size: 30px;
+  font-size: 20px;
   padding: 1.5rem;
 }
 section {
   min-height: calc(100vh - 164px);
-
   background-color: rgb(206, 206, 226);
   display: grid;
 }
@@ -53,9 +56,15 @@ section {
 
   cursor: pointer;
 }
-.card h1 {
+.card h3 {
   color: black;
+  font-size: 15px;
   background-color: transparent;
+}
+.card h1 {
+  font-size: 20px;
+  color: black;
+  background-color: white;
 }
 .card-container {
   display: flex;
@@ -72,7 +81,7 @@ section {
   align-items: start;
 }
 label {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 input {
@@ -101,6 +110,17 @@ input {
   margin: 0 10px 10px;
   color: white;
 }
+.delete-product {
+  padding: 5px 10px;
+  background-color: rgb(131, 131, 180);
+  border-radius: 5px;
+  margin: 0 10px 10px;
+  color: white;
+  border: none;
+}
+.delete-product:hover {
+  color: black;
+}
 .github-icon {
   width: 30px;
   height: 30px;
@@ -122,4 +142,20 @@ input {
 .signup-button:hover {
   background-color: black;
   color: antiquewhite;
+}
+img {
+  width: 600px;
+  height: auto;
+}
+.image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.logout {
+  height: 15px;
+  padding: 3px 5px;
+  background-color: brown;
+  border-radius: 5px;
+  display: inline-table;
 }

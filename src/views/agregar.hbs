@@ -9,6 +9,7 @@
     <section class="formulario">
 
       {{#if admin}}
+
         <form
           method="POST"
           action="/api/products"
@@ -64,8 +65,9 @@
           <br /><br />
           <input type="file" name="thumbnail" id="thumbnail" />
           <br /><br />
-          <button>Agregar producto</button>
+          <button class="delete-product">Agregar producto</button>
         </form>
+
       {{else}}
         <h1 style="color: rgb(240, 53, 53);">Debe ser administrador para acceder</h1>
       {{/if}}

@@ -1,3 +1,4 @@
+import { CreateUserDto } from "../dao/dto/createUser.js";
 import { UsersService } from "../service/users.service.js";
 
 export class SessionController {
@@ -11,7 +12,10 @@ export class SessionController {
   static login = async (req, res) => {
     const { email } = req.body;
     const user = await UsersService.getUserByEmail(email);
-    req.session.name = user.first_name;
+    const userFront = new CreateUserDto(user);
+    console.log(userFront);
+    req.session.name = userFront.full_name;
+    req.session.email = email;
     req.session.rol = user.rol;
     res.redirect("/products");
   };
