@@ -75,41 +75,50 @@ export class CartsController {
   static purchaseCart = async (req, res) => {
     try {
       const { cid: cartId } = req.params;
-      const isCart = await CartsService.getCartById(cartId);
-      //verificar el Stock de cada Producto
+      const cart = await CartsService.getCartById(cartId);
 
-      if (isCart.products.length) {
-        const ticketProduct = [];
-        const rejectedProduct = [];
-        for (let i = 0; i < isCart.products.length; i++) {
-          // Bucle q funciona async
-          const cartProduct = isCart.products[i];
+      if (cart.products.length > 0) {
+        const ticketProducts = [];
+        const rejectedProducts = [];
+
+        for (let i = 0; i < cart.products.length; i++) {
+          const cartProduct = cart.products[i];
           const productInfo = cartProduct.productId;
-          console.log(productInfo);
-          //Revisar cantidad de stock en Products List y comparar con cantidad en Cart
+
           if (cartProduct.quantity <= productInfo.stock) {
-            ticketProduct.push(cartProduct);
+            ticketProducts.push(cartProduct);
           } else {
-            rejectedProduct.push(cartProduct);
+            rejectedProducts.push(cartProduct);
           }
         }
-      }
-      const newTicket = {
-        code: uuidv4(),
-        purchase_datetime: new Date(),
-        amount: ticketProduct.reduce((acc, product) => acc + product.price, 0),
-        purchaser: req.user.email,
-      };
-      console.log(newTicket);
-      await TicketsService.createTicket(newTicket);
-      //actualizar carrito con rejected products
-      if (rejectedProduct.length) {
-        res.json({
-          message: "Estos productos no cumplen con el stock",
-          data: rejectedProduct,
-        });
+        console.log("ticketProducts", ticketProducts);
+        console.log("rejectedProducts", rejectedProducts);
+        const newTicket = {
+          code: uuidv4(),
+          purchase_date: new Date(),
+          amount: ticketProducts.reduce(
+            (acc, product) => product.productId.price * product.quantity + acc,
+            0
+          ),
+          purchaser: req.user.email,
+        };
+        console.log(newTicket);
+        //crear el ticket en base de datos.
+        await TicketsService.createTicket(newTicket);
+        //actualizar el carrito del usuario con los productos rechazados
+        if (rejectedProducts.length) {
+          res.json({
+            message: "No se pudo realizar la compra, productos bajos de stock",
+            data: rejectedProducts,
+          });
+        } else {
+          res.json({
+            message: "Compra realizada exitosamente",
+            data: ticketProducts,
+          });
+        }
       } else {
-        res.json({ message: "Compra realizada con exito" });
+        res.json({ status: "error", message: "El carrito esta vacio" });
       }
     } catch (error) {
       res.json({ status: "error", message: error.message });
