@@ -70,4 +70,12 @@ export class CartsController {
       res.json({ status: "error", message: error.message });
     }
   };
+  static purchaseCart = async (req, res) => {
+    try {
+      const { cid: cartId } = req.params;
+      const isCart = await CartsService.getCartById(cartId);
+    } catch (error) {
+      res.json({ status: "error", message: error.message });
+    }
+  };
 }

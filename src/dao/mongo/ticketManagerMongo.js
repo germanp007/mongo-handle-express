@@ -13,6 +13,17 @@ export class TicketManagerMongo {
       throw new Error("No se pudo ticket de compra", error.message);
     }
   }
+
+  async getTikets() {
+    try {
+      const tikets = await this.model.find().lean();
+
+      return tikets;
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
   async getTicketById(id) {
     try {
       const ticket = await this.model.findById(id).lean();
