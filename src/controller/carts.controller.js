@@ -2,6 +2,7 @@ import { CartsService } from "../service/carts.service.js";
 import { ProductsService } from "../service/products.service.js";
 import { v4 as uuidv4 } from "uuid";
 import { TicketsService } from "../service/ticket.service.js";
+import { CreateUserDto } from "../dao/dto/createUser.js";
 export class CartsController {
   static getCarts = async (req, res) => {
     const cartsList = await CartsService.getCarts();
@@ -74,6 +75,7 @@ export class CartsController {
   };
   static purchaseCart = async (req, res) => {
     try {
+      console.log(user);
       const { cid: cartId } = req.params;
       const cart = await CartsService.getCartById(cartId);
 
@@ -100,12 +102,12 @@ export class CartsController {
             (acc, product) => product.productId.price * product.quantity + acc,
             0
           ),
-          purchaser: req.user.email,
+          purchaser: req.session.email,
         };
         console.log(newTicket);
-        //crear el ticket en base de datos.
+
         await TicketsService.createTicket(newTicket);
-        //actualizar el carrito del usuario con los productos rechazados
+
         if (rejectedProducts.length) {
           res.json({
             message: "No se pudo realizar la compra, productos bajos de stock",

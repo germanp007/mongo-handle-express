@@ -5,4 +5,11 @@ export class CreateUserDto {
       (this.email = userInfo.email);
     this.rol = userInfo.rol;
   }
+  async getUserDto() {
+    return {
+      full_name: this.full_name,
+      email: this.email,
+      rol: this.rol,
+    };
+  }
 }
