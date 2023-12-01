@@ -1,3 +1,4 @@
+import { productCreateError } from "../service/errors/productCreateError.service.js";
 import { ProductsService } from "../service/products.service.js";
 
 export class ProductsController {
@@ -25,7 +26,15 @@ export class ProductsController {
 
   static createProducts = async (req, res) => {
     try {
-      const product = req.body;
+      const { title, description, code, price, category } = req.body;
+      if (!title || !description || !code || !price || !category) {
+        CustomError.createError({
+          name: "Error al crear usuario",
+          cause: productCreateError(req.body),
+          message: "Algunos datos fueron invalidos al crear el producto",
+          code: EError.INVALID_BODY_JSON,
+        });
+      }
       await ProductsService.createProducts(product);
 
       res.json({ status: "success", data: product });
