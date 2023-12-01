@@ -20,5 +20,5 @@ router.post(
 router.put("/:productId", ProductsController.updateProduct);
 
 router.delete("/:productId", ProductsController.delete);
-
+router.get("/mockingproducts");
 export { router as routerProducts };
