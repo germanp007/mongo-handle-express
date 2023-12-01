@@ -1,8 +1,22 @@
 import { CreateUserDto } from "../dao/dto/createUser.js";
+import { EError } from "../enums/EError.js";
+import { CustomError } from "../service/errors/customError.service.js";
+import { userCreateError } from "../service/errors/userCreateError.service.js";
 import { UsersService } from "../service/users.service.js";
 
 export class SessionController {
   static signup = async (req, res) => {
+    let { first_name, last_name, email, age } = req.body;
+
+    if (!first_name || !last_name || !email) {
+      CustomError.createError({
+        name: "Error al crear usuario",
+        cause: userCreateError(req.body),
+        message: "Algunos datos fueron invalidos al crear el usuario",
+        code: EError.INVALID_BODY_JSON,
+      });
+    }
+
     res.render("login", { message: "usuario registrado exitosamente" });
   };
 
