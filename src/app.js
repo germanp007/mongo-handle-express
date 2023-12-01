@@ -14,6 +14,7 @@ import path from "path";
 import passport from "passport";
 import { initializePassport } from "./config/passport.config.js";
 import { chatsDao, productDao, cartsDao } from "./dao/index.js";
+import { generateFakeProducts } from "./helpers/mock.js";
 
 const server = express();
 const PORT = 3000;
@@ -70,7 +71,14 @@ server.use(viewsRouter);
 server.use("/api/products", routerProducts);
 server.use("/api/carts", routerCarts);
 server.use("/api/sessions", routerSessions);
-
+server.use("/api/mockingproducts", (req, res) => {
+  let result = [];
+  for (let i = 0; i < 100; i++) {
+    let product = generateFakeProducts();
+    result.push(product);
+  }
+  res.json({ data: result });
+});
 // Socket server
 io.on("connection", async (socket) => {
   const products = await productDao.getProducts();

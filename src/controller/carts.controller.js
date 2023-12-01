@@ -75,7 +75,6 @@ export class CartsController {
   };
   static purchaseCart = async (req, res) => {
     try {
-      console.log(user);
       const { cid: cartId } = req.params;
       const cart = await CartsService.getCartById(cartId);
 

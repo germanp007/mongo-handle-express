@@ -6,8 +6,8 @@ export const generateFakeProducts = () => {
     title: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
     code: faker.random.alpha(6),
-    price,
-    image,
+    price: parseInt(faker.commerce.price()),
+    thumbnails: faker.image.imageUrl(),
     stock: parseInt(faker.random.numeric()),
     category: faker.commerce.department(),
   };
