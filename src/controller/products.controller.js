@@ -1,3 +1,4 @@
+import { logger } from "../helpers/logger.js";
 import { productCreateError } from "../service/errors/productCreateError.service.js";
 import { ProductsService } from "../service/products.service.js";
 
@@ -29,14 +30,15 @@ export class ProductsController {
       const { title, description, code, price, category } = req.body;
       if (!title || !description || !code || !price || !category) {
         CustomError.createError({
-          name: "Error al crear usuario",
+          name: "Error al crear producto",
           cause: productCreateError(req.body),
           message: "Algunos datos fueron invalidos al crear el producto",
           code: EError.INVALID_BODY_JSON,
         });
+        logger.error("Error al crear producto");
       }
       await ProductsService.createProducts(product);
-
+      logger.info("Producto creado con exito");
       res.json({ status: "success", data: product });
     } catch (error) {
       res.status(422).json({ status: "error", message: error.message });
@@ -47,6 +49,7 @@ export class ProductsController {
     const productId = req.params.productId;
     const bodyReq = req.body;
     const result = await ProductsService.updateProduct(productId, bodyReq);
+    logger.info("Producto actualizado exitosamente");
     res.json({
       status: "success",
       data: result,
@@ -57,6 +60,7 @@ export class ProductsController {
   static delete = async (req, res) => {
     const id = req.params.productId;
     const result = await ProductsService.deleteProduct(id);
+    logger.info("Producto eliminado exitosamente");
     res.json({
       status: "success",
       data: result,

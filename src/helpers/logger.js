@@ -4,7 +4,7 @@ import path from "path";
 import { config } from "../config/config.js";
 
 const currentEnv = config.server.env;
-
+console.log(currentEnv);
 const customLevels = {
   levels: {
     error: 0,
@@ -36,7 +36,7 @@ const prodLogger = winston.createLogger({
   transports: [
     new winston.transports.File({
       filename: path.join(__dirname, "/logs/warnings.log"),
-      level: "advertencia",
+      level: "info",
     }),
   ],
 });
@@ -48,3 +48,5 @@ if (currentEnv === "development") {
 } else {
   logger = prodLogger;
 }
+
+export { logger };

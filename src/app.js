@@ -15,11 +15,11 @@ import passport from "passport";
 import { initializePassport } from "./config/passport.config.js";
 import { chatsDao, productDao, cartsDao } from "./dao/index.js";
 import { generateFakeProducts } from "./helpers/mock.js";
-
+import { logger } from "./helpers/logger.js";
 const server = express();
 const PORT = 3000;
 // Server con HTTP
-const httpServer = server.listen(PORT, () => console.log("Servidor activo"));
+const httpServer = server.listen(PORT, () => logger.info("Servidor Activo"));
 
 // Server con Socket.io
 const io = new Server(httpServer);
@@ -82,7 +82,7 @@ server.use("/api/mockingproducts", (req, res) => {
 // Socket server
 io.on("connection", async (socket) => {
   const products = await productDao.getProducts();
-  console.log("Cliente Conectado");
+  logger.info("Cliente Conectado");
   socket.emit("productList", products);
   socket.on("addProduct", async (getting) => {
     await productDao.createProducts(getting);
