@@ -25,10 +25,5 @@ router.get("/cart", ViewController.getCartByIdView);
 router.get("/signup", ViewController.signupView);
 router.get("/login", ViewController.loginView);
 router.get("/profile", ViewController.profileView);
-router.get(" /loggerTest", (req, res) => {
-  logger.info("Log Info");
-  logger.advertencia("Log Info");
-  logger.error("Log Info");
-  logger.debbug("Log Info");
-});
+
 export { router as viewsRouter };

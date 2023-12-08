@@ -79,6 +79,13 @@ server.use("/api/mockingproducts", (req, res) => {
   }
   res.json({ data: result });
 });
+server.get("/loggerTest", (req, res) => {
+  logger.info("Log Info");
+  logger.advertencia("Log Info");
+  logger.error("Log Info");
+  logger.debbug("Log Info");
+  res.send("prueba logger");
+});
 // Socket server
 io.on("connection", async (socket) => {
   const products = await productDao.getProducts();

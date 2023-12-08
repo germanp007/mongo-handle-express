@@ -24,3 +24,12 @@
 {"level":"info","message":"Servidor Activo"}
 {"level":"info","message":"Servidor Activo"}
 {"level":"info","message":"Servidor Activo"}
+{"level":"info","message":"Servidor Activo"}
+{"level":"info","message":"Servidor Activo"}
+{"level":"info","message":"Servidor Activo"}
+{"level":"info","message":"Servidor Activo"}
+{"level":"info","message":"Servidor Activo"}
+{"level":"info","message":"Log Info"}
+{"level":"advertencia","message":"Log Info"}
+{"level":"error","message":"Log Info"}
+{"level":"debbug","message":"Log Info"}
