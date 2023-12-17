@@ -1,9 +1,10 @@
-import { loggers } from "winston";
 import { CreateUserDto } from "../dao/dto/createUser.js";
 import { EError } from "../enums/EError.js";
 import { CustomError } from "../service/errors/customError.service.js";
 import { userCreateError } from "../service/errors/userCreateError.service.js";
 import { UsersService } from "../service/users.service.js";
+import { generateEmailToken, sendChangePassword } from "../helpers/gmail.js";
+import { logger } from "../helpers/logger.js";
 
 export class SessionController {
   static signup = async (req, res) => {
@@ -58,9 +59,19 @@ export class SessionController {
     }
   };
 
-  static forgotPassword = (req, res) => {
+  static forgotPassword = async (req, res) => {
     const { email } = req.body;
+    console.log(email);
     //Verificar si el correo existe en la base de datos
-    UsersService.getUserByEmail(email);
+    try {
+      const user = await UsersService.getUserByEmail(email);
+      console.log(user);
+      const emailToken = generateEmailToken(email, 3600);
+      console.log(emailToken);
+      await sendChangePassword(req, email, emailToken);
+      res.send("Se envio un enlace a su correo, <a>volver a la LOGIN</a>");
+    } catch (error) {
+      res.json({ status: "error", message: error.message });
+    }
   };
 }
