@@ -17,4 +17,9 @@ export const config = {
   admin: {
     admin: process.env.ADMIN_EMAIL,
   },
+  gmail: {
+    account: process.env.ADMIN_GMAIL_EMAIL,
+    password: process.env.SUPORT_ADMIN_GMAIL,
+    secretToken: process.env.TOKEN_EMAIL,
+  },
 };
