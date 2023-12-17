@@ -25,5 +25,7 @@ router.get("/cart", ViewController.getCartByIdView);
 router.get("/signup", ViewController.signupView);
 router.get("/login", ViewController.loginView);
 router.get("/profile", ViewController.profileView);
-
+router.get("/forgot-password", (req, res) => {
+  res.render("forgotPasswordView");
+});
 export { router as viewsRouter };

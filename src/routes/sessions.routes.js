@@ -37,6 +37,8 @@ router.get(
   SessionController.githubLogin
 );
 
+router.post("/forgot-password", SessionController.forgotPassword);
+
 //Ruta LOGOUT
 router.get("/logout", SessionController.logout);
 

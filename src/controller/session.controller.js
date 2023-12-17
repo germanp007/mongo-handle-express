@@ -1,3 +1,4 @@
+import { loggers } from "winston";
 import { CreateUserDto } from "../dao/dto/createUser.js";
 import { EError } from "../enums/EError.js";
 import { CustomError } from "../service/errors/customError.service.js";
@@ -55,5 +56,11 @@ export class SessionController {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  static forgotPassword = (req, res) => {
+    const { email } = req.body;
+    //Verificar si el correo existe en la base de datos
+    UsersService.getUserByEmail(email);
   };
 }

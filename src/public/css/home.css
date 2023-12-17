@@ -117,6 +117,7 @@ input {
   margin: 0 10px 10px;
   color: white;
   border: none;
+  cursor: pointer;
 }
 .delete-product:hover {
   color: black;
