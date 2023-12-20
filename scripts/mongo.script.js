@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { config } from "../src/config/config.js";
-import { productsModel } from "../src/dao/mongo/models/products.model";
+import { productsModel } from "../src/dao/mongo/models/products.model.js";
 
 await mongoose.connect(config.mongo.url);
 

@@ -21,6 +21,10 @@ router.post(
 
 router.put("/:productId", ProductsController.updateProduct);
 
-router.delete("/:productId", ProductsController.delete);
+router.delete(
+  "/:productId",
+  checkRole(["admin", "premium"]),
+  ProductsController.deleteProduct
+);
 
 export { router as routerProducts };
