@@ -35,4 +35,12 @@ export class SessionManagerMongo {
       throw new Error("El Usuario no se encuentra registrado", error.message);
     }
   }
+  async updateUser(id) {
+    try {
+      const user = await this.model.updateOne(id);
+      return user;
+    } catch (error) {
+      throw new Error("No se pudo actualizar el usuario", error.message);
+    }
+  }
 }

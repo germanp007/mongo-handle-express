@@ -27,8 +27,15 @@ export class ProductsController {
 
   static createProducts = async (req, res) => {
     try {
-      const { title, description, code, price, category } = req.body;
-      if (!title || !description || !code || !price || !category) {
+      const productInfo = req.body;
+      productInfo.owner = req.user._id;
+      if (
+        !productInfo.title ||
+        !productInfo.description ||
+        !productInfo.code ||
+        !productInfo.price ||
+        !productInfo.category
+      ) {
         CustomError.createError({
           name: "Error al crear producto",
           cause: productCreateError(req.body),
@@ -37,9 +44,9 @@ export class ProductsController {
         });
         logger.error("Error al crear producto");
       }
-      await ProductsService.createProducts(product);
+      await ProductsService.createProducts(productInfo);
       logger.info("Producto creado con exito");
-      res.json({ status: "success", data: product });
+      res.json({ status: "success", data: productInfo });
     } catch (error) {
       res.status(422).json({ status: "error", message: error.message });
     }

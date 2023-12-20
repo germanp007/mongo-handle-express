@@ -29,6 +29,10 @@ const productSchema = new mongoose.Schema({
     required: true,
     enum: ["Calzado", "Ropa", "Tecnologia", "Deportes"],
   },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    refer: "users",
+  },
   thumbnail: String,
 });
 
