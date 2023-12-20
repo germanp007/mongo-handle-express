@@ -9,6 +9,7 @@ import {
   verifyEmailToken,
 } from "../helpers/gmail.js";
 import { logger } from "../helpers/logger.js";
+import { createHash, validationHash } from "../utils.js";
 
 export class SessionController {
   static signup = async (req, res) => {
@@ -92,6 +93,16 @@ export class SessionController {
       if (!user) {
         return res.send("Esta operacion no es valida");
       }
+      if (validationHash(newPassword, user)) {
+        return res.render("resetPassword", {
+          error: "Password invalido",
+          token,
+        });
+      }
+      const userData = {
+        ...user,
+        password: createHash(newPassword),
+      };
     } catch (error) {
       res.json({ status: "error", message: error.message });
     }

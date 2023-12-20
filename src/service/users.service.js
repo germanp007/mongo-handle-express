@@ -10,4 +10,7 @@ export class UsersService {
   static getUserById(id) {
     return sessionDao.getUserById(id);
   }
+  static updateUser(id, user) {
+    return sessionDao.updateUser(id, user);
+  }
 }
