@@ -38,6 +38,7 @@ router.get(
 );
 
 router.post("/forgot-password", SessionController.forgotPassword);
+router.post("/reset-password", SessionController.resetPassword);
 
 //Ruta LOGOUT
 router.get("/logout", SessionController.logout);

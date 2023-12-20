@@ -3,7 +3,11 @@ import { EError } from "../enums/EError.js";
 import { CustomError } from "../service/errors/customError.service.js";
 import { userCreateError } from "../service/errors/userCreateError.service.js";
 import { UsersService } from "../service/users.service.js";
-import { generateEmailToken, sendChangePassword } from "../helpers/gmail.js";
+import {
+  generateEmailToken,
+  sendChangePassword,
+  verifyEmailToken,
+} from "../helpers/gmail.js";
 import { logger } from "../helpers/logger.js";
 
 export class SessionController {
@@ -70,6 +74,24 @@ export class SessionController {
       console.log(emailToken);
       await sendChangePassword(req, email, emailToken);
       res.send("Se envio un enlace a su correo, <a>volver a la LOGIN</a>");
+    } catch (error) {
+      res.json({ status: "error", message: error.message });
+    }
+  };
+  static resetPassword = async (req, res) => {
+    try {
+      const token = req.query.token;
+      const { newPassword } = req.body;
+      const validEmail = verifyEmailToken(token);
+      if (!validEmail) {
+        return res.send(
+          "El enlace ya no es valido, genera un nuevo <a href='forgot-password'>enlace</a>"
+        );
+      }
+      const user = await UsersService.getUserByEmail(validEmail);
+      if (!user) {
+        return res.send("Esta operacion no es valida");
+      }
     } catch (error) {
       res.json({ status: "error", message: error.message });
     }

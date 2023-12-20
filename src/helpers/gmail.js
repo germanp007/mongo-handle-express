@@ -31,3 +31,13 @@ export const sendChangePassword = async (req, email, token) => {
     `,
   });
 };
+
+export const verifyEmailToken = async (token) => {
+  try {
+    const info = jwt.verify(token, config.gmail.secretToken);
+    return info.email;
+  } catch (error) {
+    console.log(error.message);
+    return null;
+  }
+};

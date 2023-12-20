@@ -28,4 +28,8 @@ router.get("/profile", ViewController.profileView);
 router.get("/forgot-password", (req, res) => {
   res.render("forgotPasswordView");
 });
+router.get("/reset-password", (req, res) => {
+  const token = req.query.token;
+  res.render("resetPassword", { token });
+});
 export { router as viewsRouter };
