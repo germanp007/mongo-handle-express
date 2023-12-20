@@ -2,6 +2,7 @@ import { Router } from "express";
 import express from "express";
 import { uploader } from "../utils.js";
 import { ProductsController } from "../controller/products.controller.js";
+import { checkAuthenticated } from "../middlewares/errors/auth.js";
 const router = Router();
 
 router.use(express.json());
@@ -13,7 +14,8 @@ router.get("/:id", ProductsController.getProductById);
 
 router.post(
   "/",
-  uploader.single("thumbnail"),
+  checkAuthenticated,
+  checkRole(["admin", "superadmin", "premium"]),
   ProductsController.createProducts
 );
 

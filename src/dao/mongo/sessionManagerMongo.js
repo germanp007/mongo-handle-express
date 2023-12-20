@@ -16,7 +16,7 @@ export class SessionManagerMongo {
   }
   async getUserByEmail(email) {
     try {
-      const user = await this.model.findOne({ email });
+      const user = await this.model.findOne({ email }).lean();
       return user;
     } catch (error) {
       console.log("get user", error.message);

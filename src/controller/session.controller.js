@@ -103,6 +103,8 @@ export class SessionController {
         ...user,
         password: createHash(newPassword),
       };
+      await UsersService.updateUser(user._id, userData);
+      res.render("login", { message: "Password actualizado correctamente" });
     } catch (error) {
       res.json({ status: "error", message: error.message });
     }

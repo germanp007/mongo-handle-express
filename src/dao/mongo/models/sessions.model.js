@@ -27,7 +27,7 @@ const registerSchema = new mongoose.Schema({
   },
   rol: {
     type: String,
-    enum: ["admin", "user"],
+    enum: ["admin", "user", "premium"],
     default: "user",
   },
 });
