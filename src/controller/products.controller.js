@@ -69,7 +69,8 @@ export class ProductsController {
       const id = req.params.productId;
       const product = await ProductsService.getProductById(id);
       if (
-        (req.user.rol === "premium" && product.owner === req.user._id) ||
+        (req.user.rol === "premium" &&
+          product.owner.toString() === req.user._id.toString()) ||
         req.user.rol === "admin"
       ) {
         const result = await ProductsService.deleteProduct(id);

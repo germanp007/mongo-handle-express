@@ -5,10 +5,10 @@ export class UserController {
     try {
       const userId = req.params.id;
       const user = await UsersService.getUserById(userId);
-      if (user.role === "premium") {
-        user.role = "user";
-      } else if (user.role === "user") {
-        user.role = "premium";
+      if (user.rol === "premium") {
+        user.rol = "user";
+      } else if (user.rol === "user") {
+        user.rol = "premium";
       } else {
         res.json({
           status: "error",
