@@ -17,6 +17,9 @@ import { chatsDao, productDao, cartsDao } from "./dao/index.js";
 import { generateFakeProducts } from "./helpers/mock.js";
 import { logger } from "./helpers/logger.js";
 import { userRouter } from "./routes/users.routes.js";
+import { swaggerSpecs } from "./config/swagger.config.js";
+import swaggerUi from "swagger-ui-express";
+
 const server = express();
 const PORT = 3000;
 // Server con HTTP
@@ -73,6 +76,7 @@ server.use("/api/products", routerProducts);
 server.use("/api/carts", routerCarts);
 server.use("/api/sessions", routerSessions);
 server.use("/api/users", userRouter);
+server.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 server.use("/api/mockingproducts", (req, res) => {
   let result = [];
   for (let i = 0; i < 100; i++) {

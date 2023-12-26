@@ -2,7 +2,7 @@ import { Router } from "express";
 import express from "express";
 import { uploader } from "../utils.js";
 import { ProductsController } from "../controller/products.controller.js";
-import { checkAuthenticated } from "../middlewares/errors/auth.js";
+import { checkAuthenticated, checkRole } from "../middlewares/errors/auth.js";
 const router = Router();
 
 router.use(express.json());

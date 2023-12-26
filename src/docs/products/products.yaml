@@ -1,0 +1,57 @@
+paths:
+  /api/products/:
+    get:
+      summary: Obtener todos los productos
+      description: Endpoint para obtener todos los productos.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Lista de Usuarios optenida correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProductInput"
+
+        "500":
+          description: Hubo un problema con el servidor
+
+components:
+  schemas:
+    ProductInput:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: id del usuario generado por mongoDB
+        title:
+          type: string
+          description: Titulo del Producto
+        description:
+          type: string
+          description: Detalles y caracteristicas del Producto
+        code:
+          type: string
+        price:
+          type: number
+        stock:
+          type: number
+        category:
+          type: string
+      required:
+        - title
+        - description
+        - code
+        - price
+        - stock
+        - category
+      example:
+        _id: ObjectId("65286b8ca87741007af46473")
+        title: Mancuernas
+        description: Mancuernas de acero inoxidable, marca Weiter
+        code: ROP113
+        price: 125
+        stock: 12
+        category: Ropa

@@ -7,9 +7,9 @@ export class ProductsController {
     try {
       const products = await ProductsService.getProducts();
 
-      res.json({ status: "success", data: products });
+      res.send({ status: "success", data: products });
     } catch (error) {
-      res.json({
+      res.send({
         status: "error",
         message: error.message,
       });
