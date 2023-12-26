@@ -7,17 +7,122 @@ paths:
         - Products
       responses:
         "200":
-          description: Lista de Usuarios optenida correctamente
+          description: Lista de Productos optenida correctamente
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/ProductInput"
+                  $ref: "#components/schemas/ProductInput"
 
         "500":
           description: Hubo un problema con el servidor
-
+    post:
+      summary: Crear un nuevo producto
+      description: Endpoint para crear un nuevo producto.
+      tags:
+        - Products
+      requestBody:
+        description: Datos del producto a crear
+        required: true
+      responses:
+        "200":
+          description: Éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#components/requestBodies/CreateProduct"
+        "422":
+          description: Error de validación
+  /api/products/{uid}:
+    get:
+      summary: Obtener la info de un producto por ID
+      description: Endpoint para obtener un producto por ID.
+      tags:
+        - Products
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del producto
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Se obtuvo correctamente el producto
+          content:
+            application/json:
+              schema:
+                $ref: "#components/schemas/ProductInput"
+        "404":
+          description: Producto no encontrado
+    put:
+      summary: Actualizar un producto
+      description: Endpoint para actualizar un producto.
+      tags:
+        - Products
+      parameters:
+        - name: uid
+          in: path
+          description: ID del producto
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        description: Datos del producto a actualizar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/CreateProduct"
+      responses:
+        "200":
+          description: Se actualizo correctamente el producto
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  message:
+                    type: string
+                    example: "Producto actualizado correctamente"
+        "401":
+          description: No tienes permisos para acceder a esta ruta
+        "500":
+          description: Se produjo un error en el servidor
+    delete:
+      summary: Eliminar un producto
+      description: Endpoint para eliminar un producto.
+      tags:
+        - Products
+      parameters:
+        - name: uid
+          in: path
+          description: ID del producto
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Producto borrado Exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "success"
+                  message:
+                    type: string
+                    example: "producto borrado exitosamente"
+        "403":
+          description: No tienes permiso para borrar este producto
+        "404":
+          description: Producto no encontrado
 components:
   schemas:
     ProductInput:
@@ -25,7 +130,7 @@ components:
       properties:
         _id:
           type: ObjectId
-          description: id del usuario generado por mongoDB
+          description: id del producto generado por mongoDB
         title:
           type: string
           description: Titulo del Producto
@@ -47,6 +152,35 @@ components:
         - price
         - stock
         - category
+      example:
+        _id: ObjectId("65286b8ca87741007af46473")
+        title: Mancuernas
+        description: Mancuernas de acero inoxidable, marca Weiter
+        code: ROP113
+        price: 125
+        stock: 12
+        category: Ropa
+  requestBodies:
+    CreateProduct:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: id del producto generado por mongoDB
+        title:
+          type: string
+          description: Titulo del Producto
+        description:
+          type: string
+          description: Detalles y caracteristicas del Producto
+        code:
+          type: string
+        price:
+          type: number
+        stock:
+          type: number
+        category:
+          type: string
       example:
         _id: ObjectId("65286b8ca87741007af46473")
         title: Mancuernas
