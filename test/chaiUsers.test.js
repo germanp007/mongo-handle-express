@@ -48,7 +48,6 @@ describe("SessionManagerMongo", () => {
 
   // Test para actualizar un usuario
   it("Debe actualizar los campos de un usuario", async () => {
-    // Supongamos que tienes un usuario existente con ID conocido
     const userId = new ObjectId("6519c547af30321c683aa453");
     const newUserDetails = {
       first_name: "UpdatedFirstName",
