@@ -37,6 +37,7 @@ describe("CartsManagerMongo", () => {
     const updatedCart = await cartsDao.addProduct(cartId, productId);
 
     expect(updatedCart).to.have.property("_id").equal(cartId);
+    expect(createdCart.products).to.be.an("array");
   });
 
   // Test para borrar un producto de un carrito
