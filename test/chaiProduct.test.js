@@ -1,4 +1,5 @@
 import { productDao } from "../src/dao";
+import { productsModel } from "../src/dao/mongo/models/products.model";
 import mongoose from "mongoose";
 import { expect } from "chai";
 
@@ -6,6 +7,10 @@ const ObjectId = mongoose.Types.ObjectId;
 
 describe("ProductManagerMongo", () => {
   // Test para la creación de productos
+  before(async function () {
+    await productsModel.deleteMany({});
+  });
+
   it("Deberia crear un producto", async () => {
     const productData = {
       title: "Zapatos Deportivos",

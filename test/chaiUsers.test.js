@@ -1,10 +1,14 @@
 import { expect } from "chai";
 import { sessionDao } from "../src/dao";
+import { registerModel } from "../src/dao/mongo/models/sessions.model";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 const ObjectId = mongoose.Types.ObjectId;
 
 describe("SessionManagerMongo", () => {
+  before(async function () {
+    await registerModel.deleteMany({});
+  });
   // Test para la creación de usuarios con contraseña hasheada
   it("Debe crear nuevo usuario con contraseña hasheada", async () => {
     const userData = {
@@ -48,7 +52,6 @@ describe("SessionManagerMongo", () => {
 
   // Test para actualizar un usuario
   it("Debe actualizar los campos de un usuario", async () => {
-    // Supongamos que tienes un usuario existente con ID conocido
     const userId = new ObjectId("6519c547af30321c683aa453");
     const newUserDetails = {
       first_name: "UpdatedFirstName",

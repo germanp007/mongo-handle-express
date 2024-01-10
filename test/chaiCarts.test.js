@@ -1,10 +1,14 @@
 import { expect } from "chai";
 import { cartsDao } from "../src/dao";
+import { cartsModel } from "../src/dao/mongo/models/carts.model";
 import mongoose from "mongoose";
 
 const ObjectId = mongoose.Types.ObjectId;
 
 describe("CartsManagerMongo", () => {
+  before(async function () {
+    await cartsModel.deleteMany({});
+  });
   // Test para la creación de carritos
   it("Debe crear un nuevo Cart", async () => {
     const newCart = {
