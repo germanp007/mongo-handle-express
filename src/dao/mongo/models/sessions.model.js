@@ -30,6 +30,25 @@ const registerSchema = new mongoose.Schema({
     enum: ["admin", "user", "premium"],
     default: "user",
   },
+  documents: {
+    type: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        reference: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
+    default: [],
+  },
+  last_connection: {
+    type: Date,
+    default: null,
+  },
 });
 
 export const registerModel = mongoose.model(registerCollection, registerSchema);
