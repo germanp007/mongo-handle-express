@@ -50,7 +50,7 @@ const profileStorage = multer.diskStorage({
     cb(null, `${req.body.email}-perfil-${file.originalname}`);
   },
 });
-const uploadProfile = multer({
+export const uploadProfile = multer({
   storage: profileStorage,
   fileFilter: profileMulterFilter,
 });
@@ -63,7 +63,7 @@ const documentsStorage = multer.diskStorage({
     cb(null, `${req.user.email}-document-${file.originalname}`);
   },
 });
-const uploadDocuments = multer({ storage: documentsStorage });
+export const uploadDocuments = multer({ storage: documentsStorage });
 
 const imgProductsStorage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -74,6 +74,4 @@ const imgProductsStorage = multer.diskStorage({
     cb(null, `${req.body.code}-product-${file.originalname}`);
   },
 });
-const uploadImgProducts = multer({ storage: imgProductsStorage });
-
-export { uploadProfile, uploadDocuments, uploadImgProducts };
+export const uploadImgProducts = multer({ storage: imgProductsStorage });

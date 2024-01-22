@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { checkRole } from "../middlewares/errors/auth.js";
 import { UserController } from "../controller/userController.js";
+import { uploadDocuments } from "../utils.js";
 
 const router = Router();
 

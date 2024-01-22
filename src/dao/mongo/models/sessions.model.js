@@ -49,6 +49,16 @@ const registerSchema = new mongoose.Schema({
     type: Date,
     default: null,
   },
+  status: {
+    type: String,
+    required: true,
+    enum: ["pendiente", "incompleto", "completo"],
+    default: "pendiente",
+  },
+  avatar: {
+    type: String,
+    default: "",
+  },
 });
 
 export const registerModel = mongoose.model(registerCollection, registerSchema);
