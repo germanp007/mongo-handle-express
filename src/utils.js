@@ -43,7 +43,7 @@ const profileMulterFilter = (req, file, cb) => {
 };
 const profileStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "/multer/users/img"));
+    cb(null, path.join(__dirname, "/multer/users/images"));
   },
 
   filename: function (req, file, cb) {
