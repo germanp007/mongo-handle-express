@@ -55,10 +55,9 @@ export class ViewController {
 
   static getCartByIdView = async (req, res) => {
     if (req.session.email) {
-      const user = req.session.rol == "user" ? true : false;
       const cart = await CartsService.getCartById("656514d3029fadadd97ba497");
       const cartList = cart.products;
-      return res.render("cart", { cartList, user });
+      return res.render("cart", { cartList });
     }
     res.render("login");
   };
