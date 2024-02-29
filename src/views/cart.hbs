@@ -1,25 +1,36 @@
 <h1>Shopping Cart</h1>
 <h2>Total a pagar: <span id="totalAmount"></span>$</h2>
-<section class="card-container">
-  {{#each cartList}}
-    <div class="card">
-      <h1>{{this.productId.title}}</h1>
-      <h3>{{this.productId.description}}</h3>
-      <div class="category">
-        <h5>category: {{this.productId.category}}</h5>
-        <h3>Quantity: {{this.quantity}}</h3>
-      </div>
-      <div>
-        <button
-          class="add-cart"
-          onclick="deleteProduct(`{{this.productId._id}}`)"
-        >borrar</button>
+{{#if user}}
+  <section class="card-container">
 
-      </div>
-    </div>
-  {{/each}}
+    {{#each cartList}}
+      <div class="card">
+        <h1>{{this.productId.title}}</h1>
+        <h3>{{this.productId.description}}</h3>
+        <div class="category">
+          <h5>category: {{this.productId.category}}</h5>
+          <h3>Quantity: {{this.quantity}}</h3>
+        </div>
+        <div>
+          <button
+            class="add-cart"
+            onclick="deleteProduct(`{{this.productId._id}}`)"
+          >borrar</button>
 
-</section>
+        </div>
+      </div>
+    {{/each}}
+
+  </section>
+{{else}}
+  <section class="card-container">
+
+    <h1 style="color: rgb(240, 53, 53); margin-top: 25px">Debe ser Usuario para
+      acceder</h1>
+  </section>
+
+{{/if}}
+]
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/cart.js"></script>
