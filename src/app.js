@@ -92,6 +92,7 @@ server.get("/loggerTest", (req, res) => {
   logger.debbug("Log Info");
   res.send("prueba logger");
 });
+
 // Socket server
 io.on("connection", async (socket) => {
   const products = await productDao.getProducts();

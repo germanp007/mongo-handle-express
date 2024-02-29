@@ -70,6 +70,7 @@ section {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  min-height: 350px;
 }
 .category {
   display: flex;
@@ -173,4 +174,8 @@ img {
   display: flex;
   justify-content: center;
   align-items: end;
+}
+
+button {
+  cursor: pointer;
 }

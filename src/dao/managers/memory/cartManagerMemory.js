@@ -18,10 +18,11 @@ class CartManagerMemory {
       const newCart = {
         id: data.length > 0 ? data[data.legth - 1].id + 1 : 1,
         title,
-        descriptio,
+        description,
         author,
         date,
       };
+      data.push(newCart);
     } catch (error) {
       console.log("No fue posible crear el cart");
     }

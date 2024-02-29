@@ -62,7 +62,7 @@ export class CartsManagerMongo {
     }
   }
 
-  async deleteProduct(cartId, productId) {
+  async deleteProductInCart(cartId, productId) {
     try {
       const cart = await this.getCartById(cartId);
       const productExist = cart.products.find(

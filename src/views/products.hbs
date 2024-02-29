@@ -38,9 +38,11 @@
   {{#if newList.prevLink}}
     <a href="{{newList.prevLink}}"><strong> &lt;&lt; Previous</strong></a>
   {{/if}}
-  <a id="go-to-cart">ir a carrito</a>
+  <a id="go-to-cart" href="/cart">ir a carrito</a>
   {{#if newList.nextLink}}
     <a href="{{newList.nextLink}}"><strong> Next &gt;&gt;</strong></a>
   {{/if}}
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/products.js"></script>

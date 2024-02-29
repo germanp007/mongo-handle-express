@@ -83,6 +83,8 @@ export class CartManager {
       } else {
         throw new Error("Carrito no encontrado");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log("Error al agregar producto a carrito de compras", error);
+    }
   }
 }

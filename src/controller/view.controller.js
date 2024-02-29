@@ -54,9 +54,13 @@ export class ViewController {
   };
 
   static getCartByIdView = async (req, res) => {
-    const cart = await CartsService.getCartById("65256d089d331a04303ef2ec");
-    const cartList = cart.products;
-    res.render("cart", { cartList });
+    if (req.session.email) {
+      const cart = await CartsService.getCartById("656514d3029fadadd97ba497");
+      const cartList = cart.products;
+      console.log(cartList);
+      return res.render("cart", { cartList });
+    }
+    res.render("login");
   };
   static signupView = (req, res) => {
     if (req.session.name) {
@@ -75,7 +79,6 @@ export class ViewController {
       const profile = req.session.name;
       const email = req.session.email;
 
-      console.log(req.session);
       return res.render("profile", {
         message: `Bienvenido ${profile} ${email}`,
       });
