@@ -55,10 +55,10 @@ export class ViewController {
 
   static getCartByIdView = async (req, res) => {
     if (req.session.email) {
+      const user = req.session.rol == "user" ? true : false;
       const cart = await CartsService.getCartById("656514d3029fadadd97ba497");
       const cartList = cart.products;
-      console.log(cartList);
-      return res.render("cart", { cartList });
+      return res.render("cart", { cartList, user });
     }
     res.render("login");
   };
