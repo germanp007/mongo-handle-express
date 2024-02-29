@@ -21,7 +21,7 @@ import { swaggerSpecs } from "./config/swagger.config.js";
 import swaggerUi from "swagger-ui-express";
 
 const server = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 // Server con HTTP
 const httpServer = server.listen(PORT, () => logger.info("Servidor Activo"));
 
